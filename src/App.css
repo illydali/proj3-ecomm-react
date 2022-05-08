@@ -1,7 +1,16 @@
-.App {
-  text-align: center;
+* {
+  font-family: 'Inconsolata', monospace;
 }
 
+a {
+  text-decoration:  none !important;
+  color : inherit !important
+}
+
+/* assign color and call classname in component -- see NAVBAR in Header.js */
+.color-nav {
+  background-color: rgb(87, 103, 76) ;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,7 +22,7 @@
   }
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -22,11 +31,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
-}
+} */
 
 @keyframes App-logo-spin {
   from {
