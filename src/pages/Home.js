@@ -1,9 +1,10 @@
 import React from "react";
+import MainCarousel from "../components/Carousel";
 
 export default function Home() {
     return (
         <React.Fragment>
-            <h1>Welcome to the Vinyl Shop</h1>
+            <MainCarousel />
         </React.Fragment>
     )
 }

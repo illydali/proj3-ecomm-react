@@ -15,6 +15,7 @@ import MainCarousel from './components/Carousel';
 
 //test
 import SubmittedForm from './pages/SubmittedForm';
+import RecordView from './pages/RecordView';
 
 
 function App() {
@@ -40,10 +41,11 @@ function App() {
       <Router>
 
         <Header />
-        <MainCarousel />
+        
 
         <Link to='/'>Home </Link>
         <Link to='/records'> Records </Link>
+        {/* <Link to="/records/:record_id">Record View</Link> */}
         <Link to='/login'>Login</Link>
         <Link to='/cart'> Cart </Link>
         <Routes>
@@ -56,7 +58,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route path='/cart' element={<Cart />} />
           <Route path="/form-submitted" element={<SubmittedForm />} />
-
+          <Route exact path="/records/:record_id" element={<RecordView />} />
         </Routes>
 
         {/* <Footer /> */}
