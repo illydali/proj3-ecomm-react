@@ -1,39 +1,114 @@
 
-import React from 'react'
-import { Container, FormControl, Navbar, Dropdown, Nav, Badge  } from 'react-bootstrap'
+import { React, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Container, FormControl, Navbar, Dropdown, Nav, Badge } from 'react-bootstrap'
 import { BiCart } from 'react-icons/bi'
+import { IoPersonCircleOutline } from 'react-icons/io5'
+import { BsFillVinylFill } from 'react-icons/bs'
 
+// test stuff here
+import { Offcanvas, NavDropdown, Form, Button } from 'react-bootstrap'
 export default function Header() {
+   
+
     return (
-        <Navbar className='color-nav' variant='dark' style={{ height: 80 }}>
-            <Container>
-                <Navbar.Brand>
-                    <a href='/'> Logo </a>
-                </Navbar.Brand>
-                <Navbar.Text className='search'>
+        <>
+            {/* <Navbar collapseOnSelect fixed='top' className='color-nav' variant='dark' style={{ height: 80 }}>
+                <Container>
+                    <Navbar.Brand as={Link} to='/'>
+                       VINYL SHOP
+                    </Navbar.Brand>
+                    <Navbar.Text className='search'>
 
-                    <FormControl
-                        style={{ width: 200 }}
-                        placeholder='Search a Product'
-                        className='m-auto'
+                        <FormControl
+                            style={{ width: 200 }}
+                            placeholder='Search a Product'
+                            className='m-auto'
+                        />
+
+                    </Navbar.Text>
+                    <Nav className='me-auto'>
+                        <Nav.Link as={Link} to='/records'>Records </Nav.Link>
+                        <Nav.Link as={Link} to='/login'>Login </Nav.Link>
+
+                        {/* <Dropdown align='end'>
+                            <Dropdown.Toggle variant='secondary'>
+                                <BiCart color='white' fontSize='25px' />
+                                <Badge bg='inherit'> {10} </Badge>
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu style={{ minWidth: 370 }}>
+                                <span style={{ padding: 10 }}>Cart is Empty! </span>
+                            </Dropdown.Menu>
+                        </Dropdown> */}
+            {/* <IoPersonCircleOutline color='white' fontSize='25px' />
+
+                    </Nav>
+
+                </Container>
+            </Navbar> */}
+
+            {/* <> */}
+
+            <Navbar collapseOnSelect fixed='sticky' bg="light" variant='light' 
+            expand='md' className="mb-3">
+                <Container fluid>
+                    <Navbar.Brand as={Link} to="/"
+                    >
+                        <BsFillVinylFill fontSize="25px" />
+                        <span>VinylShop</span>
+                    </Navbar.Brand>
+                    <Navbar.Toggle
+                        aria-controls="offcanvasNavbar-expand"
+                        
                     />
-
-                </Navbar.Text>
-                <Nav>
-                    <Dropdown align='end'>
-                        <Dropdown.Toggle variant='secondary'>
-                            <BiCart color='white' fontSize='25px' />
-                            <Badge bg='inherit'> {10} </Badge> 
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu style={{ minWidth: 370 }}>
-                            <span style={{ padding: 10 }}>Cart is Empty! </span>
-                        </Dropdown.Menu>
-                    </Dropdown>
-
-                </Nav>
-
-            </Container>
-        </Navbar>
+                    <Navbar.Offcanvas
+                        id="offcanvasNavbar-expand"
+                        aria-labelledby="offcanvasNavbarLabel-expand"
+                        placement="end"
+                    
+                         >
+                        <Offcanvas.Header closeButton>
+                            <Offcanvas.Title id="offcanvasNavbarLabel-expand">
+                                <Link to='/login'
+                                  
+                                >
+                                <IoPersonCircleOutline fontSize="30px" /></Link>
+                            </Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body>
+                            <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Nav.Link as={Link} to="/" eventKey="2"
+                                >
+                                    Home
+                                </Nav.Link>
+                                <Nav.Link as={Link} to="/records" eventKey="3"
+                                    >
+                                    Records
+                                </Nav.Link>
+                                <NavDropdown
+                                    title="Dropdown"
+                                    id="offcanvasNavbarDropdown-expand"
+                                >
+                                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action4">
+                                        Another action
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav>
+                            <Form className="d-flex">
+                                <FormControl
+                                    type="search"
+                                    placeholder="Search"
+                                    className="me-2"
+                                    aria-label="Search"
+                                />
+                                <Button variant="outline-success">Search</Button>
+                            </Form>
+                        </Offcanvas.Body>
+                    </Navbar.Offcanvas>
+                </Container>
+            </Navbar>
+        </>
     )
 }
