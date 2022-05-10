@@ -4,16 +4,15 @@ import React, {
 import axios from 'axios';
 
 import { useNavigate, Link } from 'react-router-dom'
-import config from '../config';
 import { Container, Form, Button, FloatingLabel, Row, Col } from 'react-bootstrap';
 
 export default function Register() {
 
     const navigate = useNavigate()
-    // const [registerError, setRegisterError] = useState(false)
-    // const [confirmPasswordFail, setConfirmPasswordFail] = useState(false)
-    // const [emailInUse, setEmailInUse] = useState(false)
-    // const [errorState, setErrorState] = useState({})
+    const [registerError, setRegisterError] = useState(false)
+    const [confirmPassword, setConfirmPassword] = useState(false)
+    const [emailRegistered, setEmailRegistered] = useState(false)
+    const [errorState, setErrorState] = useState({})
     const [formState, setFormState] = useState({
         'first_name': '',
         'last_name': '',
@@ -33,28 +32,93 @@ export default function Register() {
     }
     console.log(formState)
 
+    function validateEmail(email) {
+        let regex = /\S+@\S+\.\S+/;
+        return regex.test(email);
+    }
+
+    const validateInputs = async () => {
+        let isValid = true;
+        let errorMessage = {}
+
+        if (formState.first_name === "" || formState.first_name < 3) {
+            isValid = false
+            errorMessage['first_nameError'] = "First name must be at least 3 characters"
+        }
+
+        if (formState.last_name === "" || formState.last_name< 3) {
+            isValid = false
+            errorMessage['last_nameError'] = "Last name must be at least 3 characters"
+        }
+
+        if (formState.email === "" || validateEmail(formState.email) === false) {
+            isValid = false
+            errorMessage['emailError'] = "Please provide a valid email"
+        }
+
+        if (formState.address === "" || formState.address.length < 10) {
+            isValid = false
+            errorMessage['addressError'] = "Please provide your address"
+        }
+
+        if (formState.contact < 8) {
+            isValid = false
+            errorMessage['contactError'] = "Contact number must be 8 characters or more"
+        }
+
+        if (!formState.birthdate) {
+            isValid = false
+            errorMessage['birthdateError'] = "Please choose your date of birth"
+        }
+
+        setErrorState(errorMessage)
+        return isValid
+    }
 
     const createAccount = async (e) => {
         e.preventDefault()
+
+        let valid = validateInputs()
+        if (!valid) {
+            return;
+        }
+
         try {
-            let response = await axios.post('https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api'+ '/users/register', formState)
+            let response = await axios.post("https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/users/register", formState)
             console.log(response.data)
 
-
-            if (response.status === 200) {
+            if (response.data === "Unable to create user") {
+                setRegisterError(true)
+            } else if (response.data === "Passwords do not match") {
+                setConfirmPassword(true)
+                setRegisterError(true)
+            } else if (response.data === "Email already in use") {
+                setEmailRegistered(true)
+                setRegisterError(true)
+            } else if (response.status === 200) {
+                setRegisterError(false)
                 navigate("/login");
-            }
-            else (alert('error'))
+            } 
+
+            // if (response.status === 200) {
+            //     navigate("/login");
+            // }
+
         } catch (err) {
             console.log(err)
         }
-
     }
 
     return (
         <>
             <Container>
                 <Form>
+                <div>
+                <p className="error-helper"
+                    style={{ display: emailRegistered === true ? "block" : "none" }}>
+                    You have already created an account with this email, please login or use another email address
+                </p>
+            </div>
                     <Form.Group className="mb-3" controlId="formGroupFirstName">
                         <FloatingLabel
 
@@ -68,6 +132,9 @@ export default function Register() {
                                 value={formState.first_name}
                                 onChange={updateFormField}
                             />
+                            <div className="error-helper">
+                                {errorState["first_nameError"]}
+                            </div>
                         </FloatingLabel>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupLastName">
@@ -82,6 +149,9 @@ export default function Register() {
                                 value={formState.last_name}
                                 onChange={updateFormField}
                             />
+                            <div className="error-helper">
+                                {errorState["last_nameError"]}
+                            </div>
                         </FloatingLabel>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -96,6 +166,9 @@ export default function Register() {
                                 value={formState.email}
                                 onChange={updateFormField}
                             />
+                            <div className="error-helper">
+                                {errorState["emailError"]}
+                            </div>
                         </FloatingLabel>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupAddress">
@@ -110,6 +183,9 @@ export default function Register() {
                                 value={formState.address}
                                 onChange={updateFormField}
                             />
+                            <div className="error-helper">
+                                {errorState["addressError"]}
+                            </div>
                         </FloatingLabel>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -125,6 +201,9 @@ export default function Register() {
                                 value={formState.password}
                                 onChange={updateFormField}
                             />
+                            <div className="error-helper">
+                                {errorState["passwordError"]}
+                            </div>
                         </FloatingLabel>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -140,6 +219,10 @@ export default function Register() {
                                 value={formState.confirmPassword}
                                 onChange={updateFormField}
                             />
+                            <p className="error-helper"
+                                style={{ display: confirmPassword === true ? "block" : "none" }}>
+                                Passwords do not match
+                            </p>
                         </FloatingLabel>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupBirthDate">
@@ -153,6 +236,9 @@ export default function Register() {
                                 value={formState.birthdate}
                                 onChange={updateFormField}
                             />
+                            <div className="error-helper">
+                                {errorState["birthdateError"]}
+                            </div>
                         </FloatingLabel>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupContact">
@@ -167,15 +253,26 @@ export default function Register() {
                                 value={formState.contact}
                                 onChange={updateFormField}
                             />
+                            <div className="error-helper">
+                                {errorState["contactError"]}
+                            </div>
+                            {/* <Form.Control.Feedback type="invalid">
+                                {errorState.contactError}
+                            </Form.Control.Feedback> */}
                         </FloatingLabel>
                     </Form.Group>
+                    
                     <Button
                         type="submit"
                         className="mb-2"
                         variant="outline-secondary"
                         onClick={createAccount}>
-                        Login
+                        Register
                     </Button>
+                    <p className="error-helper"
+                                style={{ display: registerError === true ? "block" : "none" }}>
+                                Please complete the required information and resubmit
+                            </p>
                 </Form>
             </Container>
         </>

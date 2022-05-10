@@ -15,6 +15,12 @@ a {
   height: 40vmin;
   pointer-events: none;
 }
+.error-helper{
+  margin-top: 10px;
+  color: darkred;
+  font-style: italic;
+  text-align: end;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
