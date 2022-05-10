@@ -4,4 +4,14 @@ const config = {
 
 }
 
-export default config
+
+const getHTTPHeaders = (accessToken) => {
+    return {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+  };
+
+
+export default { config, getHTTPHeaders }

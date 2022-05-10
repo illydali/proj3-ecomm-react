@@ -70,23 +70,25 @@ export default function Header() {
                          >
                         <Offcanvas.Header closeButton>
                             <Offcanvas.Title id="offcanvasNavbarLabel-expand">
-                                <Link to='/login'
-                                  
-                                >
-                                <IoPersonCircleOutline fontSize="30px" /></Link>
+                               {/* to change later */}
+                                <IoPersonCircleOutline fontSize="30px" />
                             </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Nav.Link as={Link} to="/" eventKey="2"
+                                <Nav.Link as={Link} to="/" eventKey="1"
                                 >
                                     Home
+                                </Nav.Link>
+                                <Nav.Link as={Link} to="/login" eventKey="2"
+                                    >
+                                    Login
                                 </Nav.Link>
                                 <Nav.Link as={Link} to="/records" eventKey="3"
                                     >
                                     Records
                                 </Nav.Link>
-                                <NavDropdown
+                                {/* <NavDropdown
                                     title="Dropdown"
                                     id="offcanvasNavbarDropdown-expand"
                                 >
@@ -94,7 +96,7 @@ export default function Header() {
                                     <NavDropdown.Item href="#action4">
                                         Another action
                                     </NavDropdown.Item>
-                                </NavDropdown>
+                                </NavDropdown> */}
                             </Nav>
                             <Form className="d-flex">
                                 <FormControl

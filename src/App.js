@@ -11,54 +11,44 @@ import Records from './pages/Records';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
 import Footer from './components/Footer';
-import MainCarousel from './components/Carousel';
+import Loading from './components/Loading';
+
 
 //test
 import SubmittedForm from './pages/SubmittedForm';
 import RecordView from './pages/RecordView';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
 
 
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> 
-      </header> */}
-
-      {/* <Header/>
-      <Carousel/> */}
+     
       <Router>
 
         <Header />
-        
+        {/* <Loading/> */}
 
-        <Link to='/'>Home </Link>
+        {/* <Link to='/'>Home </Link>
         <Link to='/records'> Records </Link>
-        {/* <Link to="/records/:record_id">Record View</Link> */}
+       
         <Link to='/login'>Login</Link>
-        <Link to='/cart'> Cart </Link>
+        <Link to='/cart'> Cart </Link> */}
         <Routes>
           {/* Home route */}
           <Route path="/" element={<Home />} />
 
           {/* About Us route */}
+          <Route path="/login" element={<Login />} />
           <Route path="/records" element={<Records />} />
 
-          <Route exact path="/login" element={<Login />} />
+         
           <Route path='/cart' element={<Cart />} />
           <Route path="/form-submitted" element={<SubmittedForm />} />
           <Route exact path="/records/:record_id" element={<RecordView />} />
+          <Route exact path='/register' element={<Register/>} />
+          <Route exact path='/profile' element={<Profile/>} />
         </Routes>
 
         {/* <Footer /> */}

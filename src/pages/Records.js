@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import config from '../config';
 
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Container } from 'react-bootstrap'
 
 export default function Records() {
 
@@ -14,34 +14,48 @@ export default function Records() {
     useEffect(() => {
 
         // define the function to  use axios to get all the posts
-        const fetchPosts = async () => {
+        const fetchRecords = async () => {
             let response = await axios.get(config.TEST_URL + '/records');
             setRecords(response.data);
         }
-        fetchPosts();
+        fetchRecords();
 
     }, []); // emulate componenetDidMount (activate the effect on rendering the component)
 
-    return (
-        <React.Fragment>
+    function setCurrency(price) {
+        let dollars = price / 100;
+        dollars = dollars.toLocaleString("en-SG", {
+            style: "currency",
+            currency: "SGD"
+        })
+        return dollars
+    }
 
-            {records.map((p) => {
+    return (
+
+        <Container>
+            {records.map((p, ind) => {
                 return (
-                    <Card border="secondary" style={{ width: '18rem' }}>
+
+                    <Card key={ind} border="secondary" style={{ width: '18rem' }}>
                         <Card.Header>{p.title}</Card.Header>
                         <Card.Img variant="top" src={p.image_url} />
                         <Card.Body>
                             <Card.Title>{p.artists.name}</Card.Title>
                             <Card.Text>
                                 {p.labels.name}
+                                <br />
+                                {setCurrency(p.price)}
                             </Card.Text>
                         </Card.Body>
-                        <Button variant="primary" href={"/records/"+p.id}>Go somewhere</Button>
+                        <Button variant="outline-secondary" href={"/records/" + p.id}>See More</Button>
                     </Card>
                 )
             }
             )}
+
             <br />
-        </React.Fragment>
+        </Container>
+
     )
 }
