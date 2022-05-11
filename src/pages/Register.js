@@ -116,7 +116,7 @@ export default function Register() {
                 <div>
                 <p className="error-helper"
                     style={{ display: emailRegistered === true ? "block" : "none" }}>
-                    You have already created an account with this email, please login or use another email address
+                    You have already created an account with this email, please login
                 </p>
             </div>
                     <Form.Group className="mb-3" controlId="formGroupFirstName">

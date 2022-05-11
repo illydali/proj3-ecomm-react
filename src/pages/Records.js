@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import config from '../config';
 
-import { Card, Button, Container } from 'react-bootstrap'
+import Loader from '../components/Loader'
+import { Card, CardGroup, Button, Container, Row } from 'react-bootstrap'
 
 export default function Records() {
 
     const [records, setRecords] = useState([]);
+    const [loaded, setLoaded] = useState(false)
 
     // useEffect has 2 arguments
     // arg 1: a call back function (aka 'effect')
@@ -15,8 +16,9 @@ export default function Records() {
 
         // define the function to  use axios to get all the posts
         const fetchRecords = async () => {
-            let response = await axios.get(config.TEST_URL + '/records');
+            let response = await axios.get("https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/records");
             setRecords(response.data);
+            setLoaded(true)
         }
         fetchRecords();
 
@@ -31,31 +33,40 @@ export default function Records() {
         return dollars
     }
 
+
     return (
-
         <Container>
-            {records.map((p, ind) => {
-                return (
+            {loaded == false ?
+                <Loader />
+                :
+                <>
+                <Row xs={1} md={2} className="g-4">
+                    <CardGroup>
+                    {
+                        records.map((p, ind) => {
+                            return (
 
-                    <Card key={ind} border="secondary" style={{ width: '18rem' }}>
-                        <Card.Header>{p.title}</Card.Header>
-                        <Card.Img variant="top" src={p.image_url} />
-                        <Card.Body>
-                            <Card.Title>{p.artists.name}</Card.Title>
-                            <Card.Text>
-                                {p.labels.name}
-                                <br />
-                                {setCurrency(p.price)}
-                            </Card.Text>
-                        </Card.Body>
-                        <Button variant="outline-secondary" href={"/records/" + p.id}>See More</Button>
-                    </Card>
-                )
+                                <Card key={ind} border="secondary" style={{ width: '18rem' }}>
+                                    <Card.Header>{p.title}</Card.Header>
+                                    <Card.Img variant="top" src={p.image_url} />
+                                    <Card.Body>
+                                        <Card.Title>{p.artists.name}</Card.Title>
+                                        <Card.Text>
+                                            {p.labels.name}
+                                            <br />
+                                            {setCurrency(p.price)}
+                                        </Card.Text>
+                                    </Card.Body>
+                                    <Button variant="outline-secondary" href={"/records/" + p.id}>See More</Button>
+                                </Card>
+                            )
+                        }
+                        )
+                    }
+                    </CardGroup>
+                    </Row>
+                </>
             }
-            )}
-
-            <br />
         </Container>
-
     )
 }

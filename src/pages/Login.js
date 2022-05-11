@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from 'axios'
 import { FloatingLabel, Form, Container, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import config from "../config";
+
 import LoginContext from "../context/LoginContext";
 
 export default function Login() {
@@ -18,41 +18,24 @@ export default function Login() {
     const handlePassword = (e) => {
         setPassword(e.target.value);
     };
-    let context = useContext(LoginContext)
-    // const [loginError, setLoginError] = useState(false)
 
-    // const updateFormField = (e) => {
-    //     setFormState({
-    //         ...formState,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
-
-    // function submitForm() {
-    //     navigate('/profile', {
-    //         'state': {
-    //             'formData': formState
-    //         }
-    //     })
-    // }
 
     const login = async (e) => {
         e.preventDefault()
         alert('hello')
         try {
-            const response = await axios.post(config.TEST_URL + "/users/login", {
+            const response = await axios.post("https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/users/login", {
                 email,
                 password
             })
 
 
-            // localStorage.setItem("accessToken", response.data.accessToken)
-            // localStorage.setItem('refreshToken', response.data.refreshToken)
-            // localStorage.setItem('id', response.data.id)
-            // context.changeLogin()
-            // context.changeUser(response.data.id)
-            console.log(response.data)
+            localStorage.setItem("accessToken", response.data.accessToken)
+            localStorage.setItem('refreshToken', response.data.refreshToken)
+            localStorage.setItem('id', response.data.id)
 
+            console.log(response.data)
+            navigate('/records')
         } catch (e) {
             console.log(e)
         }
@@ -111,12 +94,13 @@ export default function Login() {
                     Login
                 </Button>
             </Form>
-            <div>
-                Don't have an account? Sign up here
-                <div className="line">
-                    <Link to="/register"> Sign Up </Link>
-                </div>
-            </div>
+    
+                New to our store? 
+                <br/>
+                <Link to="/register" >Sign up
+                 </Link>
+            
+            
         </Container>
     </>
     )

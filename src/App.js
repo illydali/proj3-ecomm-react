@@ -11,7 +11,7 @@ import Records from './pages/Records';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
 import Footer from './components/Footer';
-import Loading from './components/Loading';
+import Loader from './components/Loader'
 
 
 //test
@@ -51,7 +51,7 @@ function App() {
           <Route exact path='/profile' element={<Profile/>} />
         </Routes>
 
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );

@@ -84,6 +84,15 @@ export default function Header() {
                                     >
                                     Login
                                 </Nav.Link>
+
+{/* test route */}
+                                <Nav.Link as={Link} to="/profile" eventKey="2"
+                                    >
+                                    Profile
+                                </Nav.Link>
+
+
+
                                 <Nav.Link as={Link} to="/records" eventKey="3"
                                     >
                                     Records

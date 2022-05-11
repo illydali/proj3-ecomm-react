@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
-import config from '../config';
+
 import { Container } from 'react-bootstrap';
 
 export default function RecordView() {
@@ -15,7 +15,7 @@ export default function RecordView() {
 
         const fetchRecord = async () => {
             try {
-                const response = await axios.get(config.TEST_URL + '/records/' + record_id);
+                const response = await axios.get('https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/records/' + record_id);
                 setRecord(response.data);
                 console.log(response.data)
             } catch (e) {
@@ -36,12 +36,23 @@ export default function RecordView() {
 
     return <React.Fragment>
         <Container>
-            <h1>
+            <div>
+                <img
+                    className="d-block w-50"
+                    src=""
+                    // {currentRecord.labels.image_url}
+                    alt=""
+                />
+                </div>
+                
+            
+            <p>
                 Title: {currentRecord.title}
-            </h1>
-            <h1>
+            </p>
+            <p>
                 Desc: {currentRecord.description}
-            </h1>
+            </p>
+
         </Container >
     </React.Fragment>
 

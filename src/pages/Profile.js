@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import config from '../config';
+import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom';
-import Loading from '../components/Loading'
 import { Link } from 'react-router-dom'
+import Cart from './Cart';
+
 
 export default function Profile() {
 
@@ -13,22 +14,24 @@ export default function Profile() {
     const [user, setUser] = useState({})
 
     useEffect(() => {
+        const token = localStorage.getItem('accessToken')
         const fetch = async () => {
-            const response = await axios.get(config.TEST_URL + "/api/users/profile", {
+            const response = await axios.get(`https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/users/profile`, {
                 headers: {
-                    authorization: "Bearer " + localStorage.getItem('accessToken')
+                    Authorization: `Bearer ${token}`, 
                 }
             })
-            setUser(response.data)
+            setUser(response.data.user)
             setLoggedIn(true)
             setLoaded(true)
+            console.log(response.data)
         }
         fetch();
     }, [])
 
     if (loaded === false) {
         return (
-            <Loading />
+            <Loader />
         )
     } else if (loaded === true && loggedIn === false) {
         navigate("/login")
@@ -36,25 +39,27 @@ export default function Profile() {
 
         return (
             <>
-<div className="profile-wrapper p-2">
+                <div className="profile-wrapper p-2">
                     <h1 className="text-center mt-3">My Profile</h1>
                     <hr></hr>
                     <div className="row p-3">
                         <div className="col-6 leftcol">
-                            <ul class="profile-list">
+                            <ul >
                                 <li>Name:</li>
                                 <li>Email:</li>
-                                <li>Date of Birth:</li>
+
                                 <li>Contact Number:</li>
                                 <li>Address:</li>
                             </ul>
+
                         </div>
+                        
                         <div className="col-6">
-                            <ul class="profile-list rightcol">
-                                <li>{user.name}</li>
+                            <ul >
+                                <li>{user.first_name} {user.last_name} {user.username} </li>
                                 <li>{user.email}</li>
-                                <li>{user.dob.slice(0, 10)}</li>
-                                <li>{user.phone}</li>
+
+                                <li>{user.contact}</li>
                                 <li>{user.address}</li>
                             </ul>
                         </div>
@@ -65,6 +70,7 @@ export default function Profile() {
                         </div>
                     </div>
                 </div>
+                <Cart/>
             </>
         )
     }
