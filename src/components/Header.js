@@ -1,5 +1,5 @@
 
-import { React, useState } from 'react'
+import  React  from 'react'
 import { Link } from 'react-router-dom'
 import { Container, FormControl, Navbar, Dropdown, Nav, Badge } from 'react-bootstrap'
 import { BiCart } from 'react-icons/bi'
@@ -62,6 +62,16 @@ export default function Header() {
                         aria-controls="offcanvasNavbar-expand"
                         
                     />
+                    <Dropdown >
+                    <Dropdown.Toggle variant='light'>
+                        <BiCart color='dark' fontSize='20px' />
+                        <Badge bg='inherit'> {10} </Badge>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu style={{ minWidth: 325 }}>
+                        <span style={{ padding: 10 }}>Cart is Empty! </span>
+                    </Dropdown.Menu>
+                </Dropdown>
                     <Navbar.Offcanvas
                         id="offcanvasNavbar-expand"
                         aria-labelledby="offcanvasNavbarLabel-expand"

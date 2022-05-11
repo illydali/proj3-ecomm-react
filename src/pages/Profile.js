@@ -4,6 +4,7 @@ import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import Cart from './Cart';
+import { Button, Stack, } from 'react-bootstrap'
 
 
 export default function Profile() {
@@ -18,7 +19,7 @@ export default function Profile() {
         const fetch = async () => {
             const response = await axios.get(`https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/users/profile`, {
                 headers: {
-                    Authorization: `Bearer ${token}`, 
+                    Authorization: `Bearer ${token}`,
                 }
             })
             setUser(response.data.user)
@@ -53,7 +54,7 @@ export default function Profile() {
                             </ul>
 
                         </div>
-                        
+
                         <div className="col-6">
                             <ul >
                                 <li>{user.first_name} {user.last_name} {user.username} </li>
@@ -67,10 +68,14 @@ export default function Profile() {
                     <div className="row">
                         <div className="click-edit my-3">
                             <Link className="btn allbtn" to="/profile/edit"> Edit Profile </Link>
+                            <Stack gap={2} className="col-md-5 mx-auto">
+                                <Button variant="secondary">Save changes</Button>
+                                <Button variant="outline-secondary">Cancel</Button>
+                            </Stack>
                         </div>
                     </div>
                 </div>
-                <Cart/>
+                <Cart />
             </>
         )
     }

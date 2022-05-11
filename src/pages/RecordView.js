@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 
-import { Container } from 'react-bootstrap';
+import { Container, Button, Row, Col } from 'react-bootstrap';
+import Loader from '../components/Loader'
+
 
 export default function RecordView() {
 
@@ -10,6 +12,7 @@ export default function RecordView() {
     console.log(record_id)
     const [currentRecord, setRecord] = useState({});
     // const [currentRecordID, setCurrentRecordID] = useState(0)
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
 
@@ -21,6 +24,7 @@ export default function RecordView() {
             } catch (e) {
                 console.log("Recordview axios error", e);
             }
+            setLoaded(true)
 
         }
         fetchRecord();
@@ -33,27 +37,55 @@ export default function RecordView() {
 
     // }, [currentRecordID])
 
-
     return <React.Fragment>
-        <Container>
-            <div>
-                <img
-                    className="d-block w-50"
-                    src=""
-                    // {currentRecord.labels.image_url}
-                    alt=""
-                />
-                </div>
-                
-            
-            <p>
-                Title: {currentRecord.title}
-            </p>
-            <p>
-                Desc: {currentRecord.description}
-            </p>
 
-        </Container >
+        {loaded === false ?
+            <Loader />
+            :
+            <Container>
+                <Row>
+                    <Col xs={12} lg={6} md={6} xl={6}>
+                        <div>
+                            <img
+                                className='displayed-image'
+                                src=
+                                {currentRecord.image_url}
+
+                                alt="Record sleeve"
+                            />
+                        </div>
+
+                        </Col>
+                        <Col>
+                            <h3 className='strong'>
+                               {currentRecord.title}
+                            </h3>
+                            <p>
+                                Desc: {currentRecord.description}
+                            </p>
+                            <div className='row'>
+                                <div>
+                            {currentRecord.labels.name}
+                            </div>
+                            <div>
+                            <img 
+                            className='displayed-label-logo'
+                            src= {currentRecord.labels.image_url}
+                            alt="Label logo"
+                            
+                            />
+                            </div>
+                            </div>
+                            <Button>
+                                Add to cart
+                            </Button>
+                        
+                            </Col> 
+
+                </Row>
+
+            </Container >
+        }
     </React.Fragment>
 
 }

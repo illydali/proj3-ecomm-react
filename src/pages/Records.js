@@ -46,7 +46,7 @@ export default function Records() {
                         records.map((p, ind) => {
                             return (
 
-                                <Card key={ind} border="secondary" style={{ width: '18rem' }}>
+                                <Card key={ind} border="secondary" style={{ width: '18rem' }} >
                                     <Card.Header>{p.title}</Card.Header>
                                     <Card.Img variant="top" src={p.image_url} />
                                     <Card.Body>

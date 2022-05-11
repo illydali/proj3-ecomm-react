@@ -22,6 +22,15 @@ a {
   text-align: end;
 }
 
+.displayed-image {
+  height: 300px;
+  width: 300px;
+}
+
+.displayed-label-logo {
+  height: 50px;
+  width: 50px
+}
 
 
 @media (prefers-reduced-motion: no-preference) {
