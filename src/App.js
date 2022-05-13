@@ -10,8 +10,7 @@ import jwt_decode from "jwt-decode";
 import { useState, useEffect, useContext } from 'react';
 // impport react router stuff
 
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
-import ProductContext from './context/ProductContext';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import UserProvider from './context/UserProvider'
 
@@ -34,58 +33,29 @@ import Profile from './pages/Profile';
 
 function App() {
 
-  const [records, setRecords] = useState([]);
-
-  
-
-  const getRecordByID = (record_id) => {
-    return records.filter((p) => p.id === parseInt(record_id))[0];
-  };
-
-  const context = {
-    records: async () => {
-        let response = await axios.get(config.TEST_API_URL + "/records")
-        console.log(response.data);
-        setRecords(response.data)
-      return response.data
-    },
-    getRecordByID,
-    // user: () => {
-    //   return user
-    // },
-    // setUser: (user) => {
-    // axios call to fetch user data
-    // useState ==> this.setState: 
-    // setUser(resp)
-    // return (user)
-    // }
-  }
-
   return (
     <div className="App">
       <UserProvider>
-      <Router>
-          {/* <ProductContext.Provider value={context}> */}
+        <Router>
 
-            <Header />
+          <Header />
 
-            <Routes>
-              {/* Home route */}
-              <Route path="/" element={<Home />} />
+          <Routes>
+            {/* Home route */}
+            <Route path="/" element={<Home />} />
 
-              {/* About Us route */}
-              <Route path="/login" element={<Login />} />
-              <Route path="/records" element={<Records />} />
-              <Route path="/form-submitted" element={<SubmittedForm />} />
-              <Route exact path="/records/:record_id" element={<RecordView />} />
-              <Route exact path='/register' element={<Register />} />
-              <Route exact path='/profile' element={<Profile />} />
-              <Route exact path='/cart' element={<Cart />} />
-            </Routes>
+            {/* About Us route */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/records" element={<Records />} />
+            <Route path="/form-submitted" element={<SubmittedForm />} />
+            <Route exact path="/records/:record_id" element={<RecordView />} />
+            <Route exact path='/register' element={<Register />} />
+            <Route exact path='/profile' element={<Profile />} />
+            <Route exact path='/cart' element={<Cart />} />
+          </Routes>
 
-            <Footer />
-          {/* </ProductContext.Provider> */}
-      </Router>
+          <Footer />
+        </Router>
       </UserProvider>
     </div>
   );

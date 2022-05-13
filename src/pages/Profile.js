@@ -15,8 +15,7 @@ export default function Profile() {
     const [user, setUser] = useState({});
     const [loaded, setLoaded] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
-    // const [user, setUser] = useState({})
-
+    
     // useEffect(() => {
     //     const token = localStorage.getItem('accessToken')
     //     const fetch = async () => {
@@ -98,6 +97,7 @@ export default function Profile() {
                     <div className="row">
                         <div className="click-edit my-3">
                             <Link className="btn allbtn" to="/profile/edit"> Edit Profile </Link>
+                            <Link to="/cart"> View Cart </Link>
                             <Stack gap={2} className="col-md-5 mx-auto">
                                 <Button variant="secondary">Save changes</Button>
                                 <Button variant="outline-secondary">Cancel</Button>

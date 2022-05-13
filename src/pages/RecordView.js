@@ -17,6 +17,16 @@ export default function RecordView() {
     // const [currentRecordID, setCurrentRecordID] = useState(0)
     const [loaded, setLoaded] = useState(false)
     const context = useContext(UserContext)
+    const [user,setUser] = useState({})
+    const [alertJSX, setAlertJSX] = useState();
+
+    useEffect(() => {
+        const getUser = async () => {
+            let temp = await context.profile() 
+            setUser(temp)
+        }
+        getUser()
+    },[])
 
     useEffect(() => {
 
@@ -41,8 +51,10 @@ export default function RecordView() {
 
     // }, [currentRecordID])
 
-    const addToCart = async (productId, productName) => {
-        let response = await productContext.addToCart(productId, productName);
+    const addToCart = async (userId, recordId, recordTitle) => {
+        let response = await context.addToCart(userId,recordId, recordTitle);
+        console.log(response)
+        setAlertJSX(response)
     }
 
 
@@ -52,6 +64,7 @@ export default function RecordView() {
             <Loader />
             :
             <Container>
+                 { alertJSX ? alertJSX : null }
                 <Row>
                     <Col xs={12} lg={6} md={6} xl={6}>
                         <div>
@@ -85,7 +98,10 @@ export default function RecordView() {
                             />
                             </div>
                             </div>
-                            <Button>
+
+                            <Button onClick={() => 
+                                addToCart(user.id,currentRecord.id,currentRecord.title)
+                            }>
                                 Add to cart
                             </Button>
                         

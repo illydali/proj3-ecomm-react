@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import UserContext from './UserContext'
 import axios from 'axios';
-import config from '../config';
+
+import { Alert } from 'react-bootstrap'
+import config from '../config'
 const BASE_URL = config.TEST_API_URL
+
+
 
 export default function UserProvider(props) {
 
@@ -14,23 +18,23 @@ export default function UserProvider(props) {
     useEffect(() => {
         const accessTokenStored = localStorage.getItem("accessToken")
         if (accessTokenStored) {
-          setAccessToken(accessTokenStored);
+            setAccessToken(accessTokenStored);
         }
-      }, []);
-    
-      //if accessToken is valid, we retrieve user info
-      useEffect(() => {
+    }, []);
+
+    //if accessToken is valid, we retrieve user info
+    useEffect(() => {
         const profile = async () => {
-          if (accessToken) {
-            let response = await localStorage.getItem("user.id")
-            setUserProfile(response);
-            setLogIn(true);
-          }
+            if (accessToken) {
+                let response = await localStorage.getItem("user.id")
+                setUserProfile(response);
+                setLogIn(true);
+            }
         };
         if (accessToken) {
-          profile();
+            profile();
         }
-      }, [accessToken]);
+    }, [accessToken]);
 
     const context = {
         login: async (email, password) => {
@@ -42,6 +46,7 @@ export default function UserProvider(props) {
             if (response.data) {
                 localStorage.setItem('accessToken', response.data.accessToken);
                 localStorage.setItem('refreshToken', response.data.refreshToken);
+                localStorage.setItem('id', response.data.user.id)
                 setLogIn(true);
                 setUserProfile(response.data)
                 console.log("response data")
@@ -97,15 +102,29 @@ export default function UserProvider(props) {
             setRecords(response.data);
             if (response.data) {
                 return response.data
-            } else{
+            } else {
                 console.log('none found')
             }
+        },
+        addToCart: async (userId, recordId, recordTitle) => {
+            const token = localStorage.getItem('accessToken')
+            let URL = BASE_URL + "/cart/" + userId + "/add/" + recordId;
+            try {
+                await axios.get(URL, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
+                return (<Alert variant="success">{recordTitle} added to Shopping Cart successfully.</Alert>)
+            } catch (e) {
+                console.log("Error add to cart:", e);
+                return (<Alert variant="danger">ERROR: Failed to add product: {recordTitle} to Shopping Cart.</Alert>)
+            }
         }
-
     }
 
-    return <UserContext.Provider value={context} >
-        {props.children}
-    </UserContext.Provider >
+return <UserContext.Provider value={context} >
+    {props.children}
+</UserContext.Provider >
 
 }

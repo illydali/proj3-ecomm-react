@@ -57,7 +57,7 @@ export default function Header() {
                 <Container fluid>
                     <Navbar.Brand as={Link} to="/"
                     >
-                        <BsFillVinylFill fontSize="25px" />
+                        <BsFillVinylFill fontSize="25px"  />
                         <span>VinylShop</span>
                     </Navbar.Brand>
                     <Navbar.Toggle
@@ -69,9 +69,10 @@ export default function Header() {
                         <BiCart color='dark' fontSize='20px' />
                         <Badge bg='inherit'> {10} </Badge>
                     </Dropdown.Toggle>
-
+                    
                     <Dropdown.Menu style={{ minWidth: 325 }}>
                         <span style={{ padding: 10 }}>Cart is Empty! </span>
+                       
                     </Dropdown.Menu>
                 </Dropdown>
                     <Navbar.Offcanvas
