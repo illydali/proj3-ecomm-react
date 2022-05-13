@@ -24,11 +24,7 @@ export default function Loading() {
       <span className="trnt_text">getting funky...</span>
     </div>
 
-    // <div>
-    //   <img src='../260(1).gif'
-    //   alt="" />
-    // </div>
-
+   
   )
 }
 

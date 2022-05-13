@@ -1,5 +1,5 @@
 
-import  React  from 'react'
+import  React, { useContext }  from 'react'
 import { Link } from 'react-router-dom'
 import { Container, FormControl, Navbar, Dropdown, Nav, Badge } from 'react-bootstrap'
 import { BiCart } from 'react-icons/bi'
@@ -8,8 +8,10 @@ import { BsFillVinylFill } from 'react-icons/bs'
 
 // test stuff here
 import { Offcanvas, NavDropdown, Form, Button } from 'react-bootstrap'
+import UserContext from '../context/UserContext'
 export default function Header() {
    
+    const context = useContext(UserContext)
 
     return (
         <>
@@ -51,7 +53,7 @@ export default function Header() {
             {/* <> */}
 
             <Navbar collapseOnSelect fixed='sticky' bg="light" variant='light' 
-            expand='md' className="mb-3">
+            expand='md' className="mb-3" style={{ height: 80 }}>
                 <Container fluid>
                     <Navbar.Brand as={Link} to="/"
                     >
@@ -90,18 +92,22 @@ export default function Header() {
                                 >
                                     Home
                                 </Nav.Link>
+                               
+             
                                 <Nav.Link as={Link} to="/login" eventKey="2"
                                     >
                                     Login
                                 </Nav.Link>
 
-{/* test route */}
+            
                                 <Nav.Link as={Link} to="/profile" eventKey="2"
                                     >
+                                      
                                     Profile
                                 </Nav.Link>
+              
 
-
+                            
 
                                 <Nav.Link as={Link} to="/records" eventKey="3"
                                     >

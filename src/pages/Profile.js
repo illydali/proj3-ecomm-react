@@ -1,34 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios'
 import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import Cart from './Cart';
 import { Button, Stack, } from 'react-bootstrap'
+import UserContext from '../context/UserContext';
 
 
 export default function Profile() {
 
     const navigate = useNavigate();
+    let context = useContext(UserContext);
+    const [user, setUser] = useState({});
     const [loaded, setLoaded] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
-    const [user, setUser] = useState({})
+    // const [user, setUser] = useState({})
 
-    useEffect(() => {
-        const token = localStorage.getItem('accessToken')
-        const fetch = async () => {
-            const response = await axios.get(`https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/users/profile`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            })
-            setUser(response.data.user)
+    // useEffect(() => {
+    //     const token = localStorage.getItem('accessToken')
+    //     const fetch = async () => {
+    //         const response = await axios.get(`https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/users/profile`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`,
+    //             }
+    //         })
+    //         setUser(response.data.user)
+    //         setLoggedIn(true)
+    //         setLoaded(true)
+    //         console.log(response.data)
+    //     }
+    //     fetch();
+    // }, [])
+    
+    
+    const accessToken = localStorage.getItem('accessToken');
+
+    useEffect(()=> {
+        const fetchProfile = async () => {
+            console.log("Use effect for profile works")
+            let response = await context.profile()
+            setUser(response);
             setLoggedIn(true)
             setLoaded(true)
-            console.log(response.data)
+            console.log(response);
         }
-        fetch();
-    }, [])
+        fetchProfile();
+    }, [accessToken])
+
+    const logout = async () => {
+        let result = await context.logout();
+        console.log(result, 'logout success');
+        setLoggedIn(false);
+        setLoaded(false)
+        setUser({})
+        if(result){
+            navigate('/')
+        }
+    }
+
 
     if (loaded === false) {
         return (
@@ -74,8 +104,9 @@ export default function Profile() {
                             </Stack>
                         </div>
                     </div>
+                    <Button onClick={logout}>Logout</Button>
                 </div>
-                <Cart />
+              
             </>
         )
     }

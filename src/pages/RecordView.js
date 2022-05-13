@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 
 import { Container, Button, Row, Col } from 'react-bootstrap';
 import Loader from '../components/Loader'
 
+import config from '../config';
+import UserContext from '../context/UserContext';
+const BASE_URL = config.TEST_API_URL
 
 export default function RecordView() {
 
@@ -13,12 +16,13 @@ export default function RecordView() {
     const [currentRecord, setRecord] = useState({});
     // const [currentRecordID, setCurrentRecordID] = useState(0)
     const [loaded, setLoaded] = useState(false)
+    const context = useContext(UserContext)
 
     useEffect(() => {
 
         const fetchRecord = async () => {
             try {
-                const response = await axios.get('https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/records/' + record_id);
+                const response = await axios.get(BASE_URL +'/records/' + record_id);
                 setRecord(response.data);
                 console.log(response.data)
             } catch (e) {
@@ -36,6 +40,11 @@ export default function RecordView() {
     //     fetchRecord(currentRecordID);
 
     // }, [currentRecordID])
+
+    const addToCart = async (productId, productName) => {
+        let response = await productContext.addToCart(productId, productName);
+    }
+
 
     return <React.Fragment>
 

@@ -9,7 +9,7 @@ a {
 
 /* assign color and call classname in component -- see NAVBAR in Header.js */
 .color-nav {
-  background-color: rgb(87, 103, 76) ;
+  background-color: #e4e0c7 ;
 }
 .App-logo {
   height: 40vmin;
