@@ -95,7 +95,7 @@ export default function Cart() {
         const cartRecordId = cartItem.findIndex(p => p.record.id === parseInt(e.target.name))
         // Clone state
         let cloned = [...cartItem]
-        // Remove the tea item using splice
+        // Remove the item from original state using splice
         cloned.splice(cartRecordId, 1)
         setCartItem(cloned)
     }

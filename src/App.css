@@ -7,6 +7,26 @@ a {
   color : inherit !important
 }
 
+.suggestion {
+  cursor: pointer;
+}
+
+.suggestion:hover {
+  background-color: whitesmoke;
+}
+
+.btn-link {
+  color: grey !important
+}
+
+
+
+/* button:focus, button:active, button:hover, 
+.btn:active{
+  outline: 0px !important;
+  -webkit-appearane:none;
+  box-shadow: none !important
+} */
 /* assign color and call classname in component -- see NAVBAR in Header.js */
 .color-nav {
   background-color: #e4e0c7 ;

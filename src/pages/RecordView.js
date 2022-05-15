@@ -17,35 +17,34 @@ export default function RecordView() {
     // const [currentRecordID, setCurrentRecordID] = useState(0)
     const [loaded, setLoaded] = useState(false)
     const context = useContext(UserContext)
-    const [user,setUser] = useState({})
+    const [user, setUser] = useState({})
     const [alertJSX, setAlertJSX] = useState();
 
     useEffect(() => {
         const getUser = async () => {
-            let temp = await context.profile() 
+            let temp = await context.profile()
             setUser(temp)
         }
         getUser()
-    },[])
+    }, [])
 
     useEffect(() => {
 
         const fetchRecord = async () => {
             try {
-                const response = await axios.get(BASE_URL +'/records/' + record_id);
+                const response = await axios.get(BASE_URL + '/records/' + record_id);
                 setRecord(response.data);
                 console.log(response.data)
+                setLoaded(true)
             } catch (e) {
                 console.log("Recordview axios error", e);
             }
-            setLoaded(true)
-
         }
         fetchRecord();
     }, [record_id])
-   
+
     const addToCart = async (userId, recordId, recordTitle) => {
-        let response = await context.addToCart(userId,recordId, recordTitle);
+        let response = await context.addToCart(userId, recordId, recordTitle);
         console.log(response)
         setAlertJSX(response)
     }
@@ -57,7 +56,7 @@ export default function RecordView() {
             <Loader />
             :
             <Container>
-                 { alertJSX ? alertJSX : null }
+                {alertJSX ? alertJSX : null}
                 <Row>
                     <Col xs={12} lg={6} md={6} xl={6}>
                         <div>
@@ -70,35 +69,49 @@ export default function RecordView() {
                             />
                         </div>
 
-                        </Col>
-                        <Col>
-                            <h3 className='strong'>
-                               {currentRecord.title}
-                            </h3>
-                            <p>
-                                Desc: {currentRecord.description}
-                            </p>
-                            <div className='row'>
-                                <div>
-                            {currentRecord.labels.name}
+                    </Col>
+                    <Col>
+                        <h1 className='strong'>
+                            {currentRecord.title}
+                        </h1>
+
+                        <div className='row'>
+                            <div>
+                                {currentRecord.labels.name}
                             </div>
                             <div>
-                            <img 
-                            className='displayed-label-logo'
-                            src= {currentRecord.labels.image_url}
-                            alt="Label logo"
-                            
-                            />
-                            </div>
-                            </div>
+                                <img
+                                    className='displayed-label-logo'
+                                    src={currentRecord.labels.image_url}
+                                    alt="Label logo"
 
-                            <Button onClick={() => 
-                                addToCart(user.id,currentRecord.id,currentRecord.title)
-                            }>
-                                Add to cart
-                            </Button>
-                        
-                            </Col> 
+                                />
+                            </div>
+                        </div>
+
+                        <Button variant='link' onClick={() =>
+                            addToCart(user.id, currentRecord.id, currentRecord.title)
+                        }>
+                            Add to cart
+                        </Button>
+
+                    </Col>
+
+                </Row>
+
+                <Row>
+                    <Col xs={12} lg={6} md={6} xl={6}>
+
+
+                    </Col>
+                    <Col>
+                        <section className='mt-3'>
+                            <h6 className='strong'>Album Info</h6>
+                            <br />
+                            <p> {currentRecord.description}
+                            </p>
+                        </section>
+                    </Col>
 
                 </Row>
 

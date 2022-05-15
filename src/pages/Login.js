@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from 'axios'
-import { FloatingLabel, Form, Container, Button, Row, Col } from "react-bootstrap";
+import { FloatingLabel, Form, Container, Button, Alert, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 import UserContext from "../context/UserContext";
@@ -14,6 +14,7 @@ export default function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [logIn, setLogin] = useState(false);
+    const [unableToLogin, setUnableToLogin] = useState(false)
     
 
     const handleEmail = (e) => {
@@ -24,32 +25,16 @@ export default function Login(props) {
         setPassword(e.target.value);
     };
 
-
-    // const login = async (e) => {
-    //     e.preventDefault()
-    //     alert('hello')
-    //     try {
-    //         const response = await axios.post("https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/users/login", {
-    //             email,
-    //             password
-    //         })
-    //         localStorage.setItem("accessToken", response.data.accessToken)
-    //         localStorage.setItem('refreshToken', response.data.refreshToken)
-    //         localStorage.setItem('id', response.data.id)
-    //         userContext.userInfo(response.data.user)
-    //         console.log(response.data)
-    //         navigate('/records')
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-
-    // }
-
-    const login = async () => {
-        let result = await context.login(email, password);
-        console.log(result);
-        setLogin(true)
-        navigate('/profile')
+    const login = async () => { 
+        try{
+            let result = await context.login(email, password);
+            console.log(result);
+            setLogin(true)
+            navigate('/profile')
+        } catch(e) {
+            setUnableToLogin(true)
+        }
+       
     }
     
     return (<>
@@ -87,6 +72,11 @@ export default function Login(props) {
                     </FloatingLabel>
                 </Form.Group>
 
+                <div className="error-helper"
+                    style={{ display: unableToLogin === true ? "block" : "none"}}>
+                    Your password is incorrect or this account doesn't exist, please retry.
+                </div>
+
                 <Button
                     className="mb-2"
                     variant="outline-secondary"
@@ -97,9 +87,10 @@ export default function Login(props) {
             </Form>
     
                 New to our store? 
-                <br/>
+                <Button variant='link'>
                 <Link to="/register" >Sign up
                  </Link>
+                 </Button>
             
             
         </Container>
