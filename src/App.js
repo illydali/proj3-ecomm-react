@@ -19,6 +19,8 @@ import Home from './pages/Home'
 import Records from './pages/Records';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
+import AllOrders from './pages/AllOrders';
+import Order from './pages/Order';
 import Footer from './components/Footer';
 import Loader from './components/Loader'
 
@@ -28,6 +30,7 @@ import SubmittedForm from './pages/SubmittedForm';
 import RecordView from './pages/RecordView';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Orders from './pages/AllOrders';
 
 
 
@@ -52,6 +55,8 @@ function App() {
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/profile' element={<Profile />} />
             <Route exact path='/cart' element={<Cart />} />
+            <Route path='/allorders' element={<AllOrders/>} />
+            <Route path='/order/:order_id' element={<Order/>} />
           </Routes>
 
           <Footer />

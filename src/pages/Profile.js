@@ -98,6 +98,7 @@ export default function Profile() {
                         <div className="click-edit my-3">
                             <Link className="btn allbtn" to="/profile/edit"> Edit Profile </Link>
                             <Link to="/cart"> View Cart </Link>
+                            <Link to='/allorders'>View Order History</Link>
                             <Stack gap={2} className="col-md-5 mx-auto">
                                 <Button variant="secondary">Save changes</Button>
                                 <Button variant="outline-secondary">Cancel</Button>

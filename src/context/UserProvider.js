@@ -120,11 +120,33 @@ export default function UserProvider(props) {
                 console.log("Error add to cart:", e);
                 return (<Alert variant="danger">ERROR: Failed to add product: {recordTitle} to Shopping Cart.</Alert>)
             }
+        },
+        getAllSuccessOrders: async (userId) => {
+            let response = await axios.get(BASE_URL + '/orders/allorders/' + userId);
+            if (response.data) {
+                return response.data
+            } else {
+                console.log('none found')
+            }
+        },
+        getSingleOrder: async (orderId) => {
+            const token = localStorage.getItem('accessToken')
+            let URL = BASE_URL + '/orders/' + orderId;
+            try {
+                let response = await axios.get(URL, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
+                return response
+            } catch (e) {
+                console.log('GET ORDERS ERROR', e)
+            }
         }
     }
 
-return <UserContext.Provider value={context} >
-    {props.children}
-</UserContext.Provider >
+    return <UserContext.Provider value={context} >
+        {props.children}
+    </UserContext.Provider >
 
 }

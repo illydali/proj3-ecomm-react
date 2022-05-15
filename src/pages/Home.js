@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import MainCarousel from "../components/Carousel";
 import UserContext from "../context/UserContext";
 
+import { Card, CardGroup } from 'react-bootstrap'
+
 
 export default function Home() {
     const context = useContext(UserContext)
@@ -27,15 +29,18 @@ export default function Home() {
                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
-            <ul>
-                {allRecords.map((p => {
-                    return (
-                        <li key={p.id}>
+            <div class="scrolling-wrapper row flex-row flex-nowrap flex-lg-wrap m-4 pb-2 pt-2 gap-3 gap-lg-4"></div>
+            <CardGroup>
+            {allRecords.map((p => {
+                    return ( <Card key={p.id}>
+         
+                        <Card.Title className="text-center">
                             {p.title}
-                        </li>)
+                        </Card.Title>
+                        </Card>)
                 }))}
 
-            </ul>
+       </CardGroup>
         </React.Fragment>
     )
 }

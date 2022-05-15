@@ -43,14 +43,7 @@ export default function RecordView() {
         }
         fetchRecord();
     }, [record_id])
-    //         let response = await axios.get(config.TEST_URL + '/records/'  + recordId)
-    //         setCurrentRecord(response.data)
-    //         console.log(response.data)
-    //     }
-    //     fetchRecord(currentRecordID);
-
-    // }, [currentRecordID])
-
+   
     const addToCart = async (userId, recordId, recordTitle) => {
         let response = await context.addToCart(userId,recordId, recordTitle);
         console.log(response)
