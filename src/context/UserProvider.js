@@ -22,6 +22,25 @@ export default function UserProvider(props) {
         }
     }, []);
 
+    useEffect(() => {
+        setInterval(async () => {
+            let refreshToken = localStorage.getItem('refreshToken');
+            if (refreshToken) {
+                try {
+                    const response = await axios.post(config.TEST_API_URL + '/users/refresh', {
+                        refreshToken
+                    })
+                    localStorage.setItem('accessToken', response.data.accessToken);
+                    setAccessToken(localStorage.getItem('accessToken'))
+                } catch (e) {
+                    console.log('refresh token is expired, pls. log in');
+                }
+            } else {
+                localStorage.clear();
+            }
+        }, config.REFRESH_INTERVAL)
+    }, []);
+
     //if accessToken is valid, we retrieve user info
     useEffect(() => {
         const profile = async () => {

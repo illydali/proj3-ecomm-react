@@ -1,6 +1,6 @@
 
 import React, { useContext, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Container, FormControl, Navbar, Dropdown, Nav, Badge, Row, Col, Toast, Modal } from 'react-bootstrap'
 import { BiCart } from 'react-icons/bi'
@@ -13,7 +13,7 @@ import { Offcanvas, NavDropdown, Form, Button } from 'react-bootstrap'
 import UserContext from '../context/UserContext'
 
 import config from '../config'
-import Records from '../pages/Records'
+
 const BASEURL = config.TEST_API_URL
 
 export default function Header() {
@@ -62,7 +62,7 @@ export default function Header() {
         if (text.length > 0) {
             findMatch = search.filter(s => {
                 const regex = new RegExp(`${text}`, "gi")
-                return s.title.match(regex)
+                return (s.title.match(regex), s.artists.name.match(regex))
             })
         }
         console.log(search)
@@ -177,22 +177,23 @@ export default function Header() {
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
+                            <p>Search Results</p>
                             {suggestions && suggestions.map((sug) => {
                                 return (
+                                    <>
                                 <div key={sug.id} 
-                                className='suggestion'
-                                onClick={() => {
-                                    onSearchHandler(suggestions.title)
-                                }}
-                                >{sug.title}</div> )
+                                
+                                // onClick={() => {
+                                //     onSearchHandler(<Link to={"/records/" + `${search.id}`}></Link>)
+                                // }}
+                                
+                                >{sug.title}</div> 
+                                <Link variant='outline-secondary' className='suggestion text-end' to={'/records/' + sug.id} onClick={handleClose}>view item</Link>
+                                </>
+                                )
                             })}
                         </Modal.Body>
-                        <Modal.Footer>
-
-                            <Button variant="primary" onClick={handleClose}>
-                                Save Changes
-                            </Button>
-                        </Modal.Footer>
+                        
                     </Modal>
 
                 </Container>

@@ -52,7 +52,6 @@ function App() {
             <Route path="/records" element={<Records />} />
             <Route path="/form-submitted" element={<SubmittedForm />} />
             <Route exact path="/records/:record_id" element={<RecordView />} />
-            {/* <Route exact path='/search' element={<Header/>} /> */}
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/profile' element={<Profile />} />
             <Route exact path='/cart' element={<Cart />} />

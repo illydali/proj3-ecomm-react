@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
-
-import { Container, Button, Row, Col } from 'react-bootstrap';
+import moment from 'moment';
+import { Container, Button, Row, Col, ListGroup } from 'react-bootstrap';
 import Loader from '../components/Loader'
 
 import config from '../config';
@@ -49,6 +49,27 @@ export default function RecordView() {
         setAlertJSX(response)
     }
 
+    function setCurrency(price) {
+        let dollars = price / 100;
+        dollars = dollars.toLocaleString("en-SG", {
+            style: "currency",
+            currency: "SGD"
+        })
+        return dollars
+    }
+
+    function setDate(date) {
+
+    }
+
+    const renderDetails = () => {
+        return (
+            <>
+
+            </>
+        )
+    }
+
 
     return <React.Fragment>
 
@@ -70,22 +91,25 @@ export default function RecordView() {
                         </div>
 
                     </Col>
-                    <Col>
+                    <Col className='mx-3'>
                         <h1 className='strong'>
                             {currentRecord.title}
                         </h1>
 
                         <div className='row'>
-                            <div>
+                            <div className='mx-2'>
                                 {currentRecord.labels.name}
                             </div>
-                            <div>
+                            <div className='mx-2 px-2'>
                                 <img
                                     className='displayed-label-logo'
                                     src={currentRecord.labels.image_url}
                                     alt="Label logo"
 
                                 />
+                            </div>
+                            <div className='mx-2'>
+                                {setCurrency(currentRecord.price)}
                             </div>
                         </div>
 
@@ -105,12 +129,24 @@ export default function RecordView() {
 
                     </Col>
                     <Col>
-                        <section className='mt-3'>
-                            <h6 className='strong'>Album Info</h6>
-                            <br />
-                            <p> {currentRecord.description}
-                            </p>
-                        </section>
+
+                        <div className='mx-3'>
+                            <section>
+                                <h6 className='strong'>Album Info</h6>
+                                <br />
+                                <p> {currentRecord.description}
+                                </p>
+
+                            </section>
+                        </div>
+                        <ListGroup variant="flush" >
+                            <ListGroup.Item>Label: {currentRecord.labels.name}</ListGroup.Item>
+                            <ListGroup.Item>Release Date: {moment(currentRecord.release_date).format('MMMM Do YYYY')}</ListGroup.Item>
+                            <ListGroup.Item>Genre: {currentRecord.genres[0].name}</ListGroup.Item>
+                            <ListGroup.Item>Format: {currentRecord.type}</ListGroup.Item>
+                            <ListGroup.Item>Speed: {currentRecord.speed} RPM</ListGroup.Item>
+                            <ListGroup.Item>Size: {currentRecord.record_size}</ListGroup.Item>
+                        </ListGroup>
                     </Col>
 
                 </Row>
