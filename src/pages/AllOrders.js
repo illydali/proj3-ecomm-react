@@ -59,7 +59,7 @@ export default function Orders() {
                     <td>{o.order_date.slice(0, 10)}</td>
                     <td>${(o.payment_total / 100).toFixed(2)}</td>
                     {/* <td>{o.date_of_completion === null ? "-" : o.date_of_completion.slice(0, 10)}</td> */}
-                    <td><Link className="footer-link-cta" to={"/order/" + o.id}>See More</Link>
+                    <td><Link className="suggestion cart-checkout" to={"/order/" + o.id}>See More</Link>
                     </td>
                 </tr>
             )

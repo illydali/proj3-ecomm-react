@@ -34,7 +34,7 @@ export default function UserProvider(props) {
                     localStorage.setItem('accessToken', response.data.accessToken);
                     setAccessToken(localStorage.getItem('accessToken'))
                 } catch (e) {
-                    console.log('refresh token is expired, pls. log in');
+                    console.log('refresh token is expired, pls log in');
                 }
             } else {
                 localStorage.clear();
@@ -96,6 +96,7 @@ export default function UserProvider(props) {
             }
 
         },
+        userProfile,
 
         logout: async () => {
             let refresh = {
@@ -107,6 +108,7 @@ export default function UserProvider(props) {
                 if (response.data) {
                     setLogIn(false);
                     setUserProfile({});
+                    setCartItem([])
                     localStorage.clear()
                     return true; //logout success
                 }

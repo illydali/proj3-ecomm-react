@@ -73,6 +73,7 @@ export default function Cart() {
         }
         // Set back the state
         setCartItem(cloned)
+        context.setCartItem(cloned)
         let userId = user.id
         await axios.post(`${baseUrl}/cart/${userId}/updateQuantity/${e.target.name}`, {
             "quantity": cloned[cartRecordId].quantity
@@ -85,6 +86,7 @@ export default function Cart() {
         let cloned = [...cartItem]
         cloned[cartRecordId].quantity += 1
         setCartItem(cloned)
+        context.setCartItem(cloned)
         let userId = user.id
         await axios.post(`${baseUrl}/cart/${userId}/updateQuantity/${e.target.name}`, {
             "quantity": cloned[cartRecordId].quantity
@@ -102,6 +104,7 @@ export default function Cart() {
         // Remove the item from original state using splice
         cloned.splice(cartRecordId, 1)
         setCartItem(cloned)
+        context.setCartItem(cloned)
     }
 
     const renderCartItem = () => {
@@ -124,7 +127,7 @@ export default function Cart() {
                                 <Button className="cart-update-qty ml-2" onClick={addQuantity} name={p.record.id} value={p.quantity}>+</Button>
                             </div>
                             <Button className="cart-qty-cta mb-1" onClick={deleteFromCart} name={p.record.id}>Delete</Button>
-                            <div className="cart-indi-cost">
+                            <div className="d-flex justify-content flex-end">
                                 <p>${(p.record.price * p.quantity / 100).toFixed(2)}</p>
                             </div>
                         </div>
@@ -154,7 +157,7 @@ export default function Cart() {
     }
     else {
         return (<>
-
+            <Container>
                 <div>
                     <div className="page-width" style={{ display: "block" }}>
                         <h1 className="mb-2">My Cart</h1>
@@ -164,11 +167,11 @@ export default function Cart() {
                             <p>  ${(totalCost / 100).toFixed(2)}  </p>
                         </div>
                         <div className="cart-checkout">
-                            <a className="cta" href={`${baseUrl}/checkout/?user_id=`+localStorage.getItem("id")}>Checkout</a>
+                            <a className='suggestion' href={`${baseUrl}/checkout/?user_id=`+localStorage.getItem("id")}>Checkout</a>
                         </div>
                     </div>
                 </div>
-
+                </Container>
             </>
         )
     }

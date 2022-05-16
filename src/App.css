@@ -29,6 +29,18 @@ a {
   min-width:80%;
 }
 
+.cta h1 {
+  font-size: 2.2em;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.cta p {
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+
 
 .cartitem {
   display: flex;
@@ -132,12 +144,6 @@ a {
   font-size: 0.8em;
 }
 
-.cart-indi-cost{
-  position: absolute;
-  right:2%;
-  bottom:-10%;
-
-}
 
 .cart-total-cost{
   display:flex;

@@ -45,7 +45,7 @@ export default function RecordView() {
 
     const addToCart = async (userId, recordId, recordTitle) => {
         let response = await context.addToCart(userId, recordId, recordTitle);
-        console.log(response)
+        console.log(response.data)
         setAlertJSX(response)
     }
 

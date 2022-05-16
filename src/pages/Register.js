@@ -84,7 +84,7 @@ export default function Register() {
         }
 
         try {
-            let response = await axios.post("https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/users/register", formState)
+            let response = await axios.post("https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us45.gitpod.io/api/users/register", formState)
             console.log(response.data)
 
             if (response.data === "Unable to create user") {

@@ -22,7 +22,7 @@ export default function Header() {
     const [user, setUser] = useState({});
     const [loggedIn, setLoggedIn] = useState(false)
     const [cart, setCart] = useState([])
-
+    const [totalCost, setTotalCost] = useState(0)
     const [search, setSearch] = useState([])
     const [show, setShow] = useState(false);
     const [text, setText] = useState("");
@@ -72,6 +72,16 @@ export default function Header() {
         }
         getCart()
     }, [])
+
+    useEffect(() => {
+        let totalCost = 0;
+        for (let i of context.cartItem) {
+            totalCost += (i.record.price * i.quantity)
+        }
+        setTotalCost(totalCost)
+    }, [context.cartItem])
+
+
 
     function setCurrency(price) {
         let dollars = price / 100;
@@ -134,21 +144,15 @@ export default function Header() {
                                                 <div className="cartItemDetail">
                                                     <span>{p.record.title}</span>
                                                     <span>{setCurrency(p.record.price)} </span>
-                                                    <span>{p.quantity}</span>{}
+                                                    <span>{p.quantity}</span>{ }
                                                 </div>
-                                                {/* <AiFillDelete
-                                          fontSize="20px"
-                                          style={{ cursor: "pointer" }}
-                                          onClick={() =>
-                                            dispatch({
-                                              type: "REMOVE_FROM_CART",
-                                              payload: prod,
-                                            })
-                                          }
-                                        /> */}
+
                                             </span>
                                         )
                                     })}
+                                    <hr />
+                                    <p className='text-center'> SUBTOTAL:
+                                        ${(totalCost / 100).toFixed(2)}  </p>
                                     <Link to="/cart">
                                         <Button variant='outline-secondary' style={{ width: "95%", margin: "0 10px" }} >
                                             Go To Cart

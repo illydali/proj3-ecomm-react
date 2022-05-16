@@ -24,13 +24,12 @@ import Order from './pages/Order';
 import Footer from './components/Footer';
 import Loader from './components/Loader'
 
-
-//test
 import SubmittedForm from './pages/SubmittedForm';
 import RecordView from './pages/RecordView';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
-import Orders from './pages/AllOrders';
+import EditProfile from './pages/EditProfile';
+
 
 
 
@@ -54,6 +53,7 @@ function App() {
             <Route exact path="/records/:record_id" element={<RecordView />} />
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/profile' element={<Profile />} />
+            <Route exact path='profile/edit' element={<EditProfile/> } />
             <Route exact path='/cart' element={<Cart />} />
             <Route path='/allorders' element={<AllOrders/>} />
             <Route path='/order/:order_id' element={<Order/>} />

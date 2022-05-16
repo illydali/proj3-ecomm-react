@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
+import moment from 'moment';
 import axios from 'axios'
 import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import Cart from './Cart';
-import { Button, Stack, } from 'react-bootstrap'
+import { Button, Container, Stack, } from 'react-bootstrap'
 import UserContext from '../context/UserContext';
 
 
@@ -15,7 +16,7 @@ export default function Profile() {
     const [user, setUser] = useState({});
     const [loaded, setLoaded] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
-    
+
     // useEffect(() => {
     //     const token = localStorage.getItem('accessToken')
     //     const fetch = async () => {
@@ -31,11 +32,11 @@ export default function Profile() {
     //     }
     //     fetch();
     // }, [])
-    
-    
+
+
     const accessToken = localStorage.getItem('accessToken');
 
-    useEffect(()=> {
+    useEffect(() => {
         const fetchProfile = async () => {
             console.log("Use effect for profile works")
             let response = await context.profile()
@@ -53,7 +54,7 @@ export default function Profile() {
         setLoggedIn(false);
         setLoaded(false)
         setUser({})
-        if(result){
+        if (result) {
             navigate('/')
         }
     }
@@ -69,45 +70,42 @@ export default function Profile() {
 
         return (
             <>
+            <Container>
                 <div className="profile-wrapper p-2">
                     <h1 className="text-center mt-3">My Profile</h1>
                     <hr></hr>
                     <div className="row p-3">
                         <div className="col-6 leftcol">
-                            <ul >
-                                <li>Name:</li>
-                                <li>Email:</li>
+                            <p>Name:</p>
 
-                                <li>Contact Number:</li>
-                                <li>Address:</li>
-                            </ul>
+                            <p>Email:</p>
+                            <p>Birthate: </p>
+                            <p>Contact Number:</p>
+                            <p>Address:</p>
+
 
                         </div>
 
                         <div className="col-6">
-                            <ul >
-                                <li>{user.first_name} {user.last_name} {user.username} </li>
-                                <li>{user.email}</li>
 
-                                <li>{user.contact}</li>
-                                <li>{user.address}</li>
-                            </ul>
+                            <p>{user.first_name} {user.last_name} {user.username} </p>
+                            <p>{user.email}</p>
+                            <p>{moment(user.birth_date).format('MMMM Do YYYY')} </p>
+                            <p>{user.contact}</p>
+                            <p>{user.address}</p>
+
                         </div>
                     </div>
                     <div className="row">
-                        <div className="click-edit my-3">
-                            <Link className="btn allbtn" to="/profile/edit"> Edit Profile </Link>
-                            <Link to="/cart"> View Cart </Link>
-                            <Link to='/allorders'>View Order History</Link>
-                            <Stack gap={2} className="col-md-5 mx-auto">
-                                <Button variant="secondary">Save changes</Button>
-                                <Button variant="outline-secondary">Cancel</Button>
-                            </Stack>
+                        <div className="text-center my-3">
+                            <Link className="suggestion cart-checkout" to="/profile/edit"> Edit Profile </Link>
+                            <Link className='suggestion cart-checkout' to="/cart"> View Cart </Link>
+                            <Link className='suggestion cart-checkout' to='/allorders'>View Order History</Link>
+                            <Button variant='outline-secondary' className='my-2' onClick={logout}>Logout</Button>
                         </div>
                     </div>
-                    <Button onClick={logout}>Logout</Button>
                 </div>
-              
+                </Container>
             </>
         )
     }
