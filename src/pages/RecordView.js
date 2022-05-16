@@ -58,19 +58,6 @@ export default function RecordView() {
         return dollars
     }
 
-    function setDate(date) {
-
-    }
-
-    const renderDetails = () => {
-        return (
-            <>
-
-            </>
-        )
-    }
-
-
     return <React.Fragment>
 
         {loaded === false ?

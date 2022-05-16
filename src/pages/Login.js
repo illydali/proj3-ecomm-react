@@ -39,8 +39,8 @@ export default function Login(props) {
     
     return (<>
 
-        <Container>
-            <Form>
+        <Container className="min-vh-100">
+            <Form >
                 <Form.Group className="mb-3 justify-content" controlId="formGroupEmail">
                     <FloatingLabel
                         controlId="floatingInput"

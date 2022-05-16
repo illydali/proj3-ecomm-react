@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+
 import axios from 'axios'
 import { Container, Alert, Button } from 'react-bootstrap'
 import { AiOutlinePlusSquare } from 'react-icons/ai'
@@ -17,6 +17,7 @@ export default function Cart() {
     const [totalCost, setTotalCost] = useState(0)
     const [user, setUser] = useState({})
 
+
     const [alertJSX, setAlertJSX] = useState();
 
     useEffect(() => {
@@ -28,6 +29,7 @@ export default function Cart() {
         getUser()
     }, [])
 
+    
     useEffect(() => {
         const fetchCart = async () => {
             let userId = localStorage.getItem("id")
@@ -38,6 +40,7 @@ export default function Cart() {
                 setCartItem(response.data)
                 setLoaded(true)
                 setIsLoggedIn(true)
+                context.setCartItem(response.data)
                 console.log(response.data)
                 console.log(cartItem)
             } else {
@@ -74,6 +77,7 @@ export default function Cart() {
         await axios.post(`${baseUrl}/cart/${userId}/updateQuantity/${e.target.name}`, {
             "quantity": cloned[cartRecordId].quantity
         })
+        console.log(cartItem)
     }
 
     const addQuantity = async (e) => {
@@ -169,14 +173,3 @@ export default function Cart() {
         )
     }
 }
-
-
-    //         <Container align='center'>
-    //             {/* <h1>Cart!</h1>
-    //                     {cartItem.map((c => {
-    //                         return (
-    //                             <div key={c.id}> {c.record.title}</div>
-    //                         )
-    //                     }))} */}
-    //             {renderCartItem()}
-    //         </Container>

@@ -2,6 +2,11 @@
   font-family: 'Inconsolata', monospace;
 }
 
+body { 
+  padding-top: 100px; 
+
+}
+
 a {
   text-decoration:  none !important;
   color : inherit !important
@@ -13,12 +18,39 @@ a {
 
 .suggestion:hover {
   background-color: whitesmoke;
+  font-style: italic;
 }
 
 .btn-link {
   color: grey !important
 }
 
+.modal-80w {
+  min-width:80%;
+}
+
+
+.cartitem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px;
+  margin-bottom: 20px;
+}
+
+.cartItemImg {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.cartItemDetail {
+  display: flex;
+  flex: 1;
+  padding: 0 20px;
+  flex-direction: column;
+}
 
 /* button:focus, button:active, button:hover, 
 .btn:active{
@@ -28,12 +60,16 @@ a {
 } */
 /* assign color and call classname in component -- see NAVBAR in Header.js */
 .color-nav {
-  background-color: #e4e0c7 ;
+  background-color: rgb(9, 2, 2);
+  color: white
 }
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.footer-wrapper{
+  background-color: rgb(9, 2, 2);
+  margin-top: 50px;
+  padding:2em;
+  color: white
 }
+
 .error-helper{
   margin-top: 10px;
   color: darkred;

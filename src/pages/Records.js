@@ -61,7 +61,7 @@ export default function Records() {
 
 
     return (
-        <Container>
+        <Container className="min-vh-100">
             {loaded == false ?
                 <Loader />
                 :

@@ -14,6 +14,7 @@ export default function UserProvider(props) {
     const [logIn, setLogIn] = useState(false);
     const [records, setRecords] = useState([]);
     const [accessToken, setAccessToken] = useState("")
+    const [cartItem, setCartItem] = useState([])
 
     useEffect(() => {
         const accessTokenStored = localStorage.getItem("accessToken")
@@ -75,8 +76,6 @@ export default function UserProvider(props) {
                 setLogIn(false);
                 return false;
             }
-
-
         },
 
         profile: async () => {
@@ -125,6 +124,18 @@ export default function UserProvider(props) {
                 console.log('none found')
             }
         },
+        getCart: async (userId) => {
+                let response = await axios.get(BASE_URL + "/cart/" + userId)
+                if (response.data !== "Unable to get items.") {
+                    setCartItem(response.data)
+                    console.log(response.data)
+                    return response.data
+                } else {
+                    console.log('none')
+            }
+        },
+        setCartItem,
+        cartItem,
         addToCart: async (userId, recordId, recordTitle) => {
             const token = localStorage.getItem('accessToken')
             let URL = BASE_URL + "/cart/" + userId + "/add/" + recordId;
