@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { Alert } from 'react-bootstrap'
 import config from '../config'
-const BASE_URL = config.TEST_API_URL
+const BASE_URL = config.BASE_API_URL
 
 
 
@@ -21,11 +21,12 @@ export default function UserProvider(props) {
             let refreshToken = localStorage.getItem('refreshToken');
             if (refreshToken) {
                 try {
-                    const response = await axios.post(config.TEST_API_URL + '/users/refresh', {
+                    const response = await axios.post(BASE_URL + '/users/refresh', {
                         refreshToken
                     })
                     localStorage.setItem('accessToken', response.data.accessToken);
-                    setAccessToken(localStorage.getItem('accessToken'))
+                    setAccessToken(localStorage.setItem('accessToken'))
+                    console.log('access token reset for another 15mins')
                 } catch (e) {
                     console.log('refresh token is expired, pls log in');
                 }
@@ -53,14 +54,15 @@ export default function UserProvider(props) {
                 return true;
             } else {
                 setLogIn(false);
-                return false;
+                setUserProfile({})
+                localStorage.clear()
             }
         },
-
         profile: async () => {
+            let profileToken = localStorage.getItem('accessToken')
             const response = await axios.get(BASE_URL + '/users/profile', {
                 headers: {
-                    Authorization: `Bearer ${accessToken}`,
+                    Authorization: `Bearer ${profileToken}`,
                 }
             })
             if (response.data) {
@@ -103,13 +105,13 @@ export default function UserProvider(props) {
             }
         },
         getCart: async (userId) => {
-                let response = await axios.get(BASE_URL + "/cart/" + userId)
-                if (response.data !== "Unable to get items.") {
-                    setCartItem(response.data)
-                    console.log(response.data)
-                    return response.data
-                } else {
-                    console.log('none')
+            let response = await axios.get(BASE_URL + "/cart/" + userId)
+            if (response.data !== "Unable to get items.") {
+                setCartItem(response.data)
+                console.log(response.data)
+                return response.data
+            } else {
+                console.log('none')
             }
         },
         setCartItem,

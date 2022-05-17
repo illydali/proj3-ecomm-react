@@ -19,6 +19,8 @@ export default function Home() {
         getRecords()
     }, [])
 
+
+
     return (
         <React.Fragment>
             <div>
@@ -35,9 +37,10 @@ export default function Home() {
 
                             </div>
                         </div>
-                        
-                            <Button variant='light' type="button" className="p-2 btn btn-lg mt-3 ps-3 pe-3 fs-6">SHOP NOW</Button>
-                      
+                        <Link to='/records'>
+                            <Button variant='light' type="button" className="p-2 btn btn-lg mt-3 ps-3 pe-3 fs-6"
+                            >SHOP NOW</Button>
+                        </Link>
                     </div>
                 </section>
 

@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import moment from 'moment';
-import axios from 'axios'
 import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-import Cart from './Cart';
-import { Button, Container, Stack, } from 'react-bootstrap'
+import { Button, Container, } from 'react-bootstrap'
 import UserContext from '../context/UserContext';
-
 
 export default function Profile() {
 
@@ -16,23 +13,6 @@ export default function Profile() {
     const [user, setUser] = useState({});
     const [loaded, setLoaded] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
-
-    // useEffect(() => {
-    //     const token = localStorage.getItem('accessToken')
-    //     const fetch = async () => {
-    //         const response = await axios.get(`https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/users/profile`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //             }
-    //         })
-    //         setUser(response.data.user)
-    //         setLoggedIn(true)
-    //         setLoaded(true)
-    //         console.log(response.data)
-    //     }
-    //     fetch();
-    // }, [])
-
 
     const accessToken = localStorage.getItem('accessToken');
 
@@ -58,7 +38,6 @@ export default function Profile() {
             navigate('/')
         }
     }
-
 
     if (loaded === false) {
         return (

@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
 
-export default function Login(props) {
+export default function Login() {
     const context = useContext(UserContext)
 
     const navigate = useNavigate();
@@ -16,7 +16,6 @@ export default function Login(props) {
     const [logIn, setLogin] = useState(false);
     const [unableToLogin, setUnableToLogin] = useState(false)
     
-
     const handleEmail = (e) => {
         setEmail(e.target.value);
     };
@@ -33,12 +32,12 @@ export default function Login(props) {
             navigate('/profile')
         } catch(e) {
             setUnableToLogin(true)
+            setEmail("")
+            setPassword("")
         }
-       
     }
     
     return (<>
-
         <Container className="min-vh-100">
             <Form >
                 <Form.Group className="mb-3 justify-content" controlId="formGroupEmail">

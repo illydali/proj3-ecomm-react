@@ -3,10 +3,11 @@ import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { Container, Alert, Button } from 'react-bootstrap'
 import { AiOutlinePlusSquare } from 'react-icons/ai'
+import { RiDeleteBin5Line } from 'react-icons/ri'
 import Loader from '../components/Loader'
 import UserContext from '../context/UserContext'
 import config from '../config';
-const baseUrl = config.TEST_API_URL
+const baseUrl = config.BASE_API_URL
 
 export default function Cart() {
 
@@ -17,17 +18,27 @@ export default function Cart() {
     const [totalCost, setTotalCost] = useState(0)
     const [user, setUser] = useState({})
 
-
     const [alertJSX, setAlertJSX] = useState();
 
+    const accessToken = localStorage.getItem('accessToken');
+
     useEffect(() => {
-        const getUser = async () => {
-            let temp = await context.profile()
-            setUser(temp)
-            console.log(temp)
+        const fetchProfile = async () => {
+            try {
+                console.log("Use effect for header works")
+                let response = await context.profile()
+                setUser(response);
+                setIsLoggedIn(true)
+                console.log(response);
+            } catch (e) {
+                setIsLoggedIn(false)
+                setUser({})
+                setAlertJSX(<Alert>Please login or register.</Alert>)
+                console.log('cart acesss failed' , e)
+            }
         }
-        getUser()
-    }, [])
+        fetchProfile();
+    }, [accessToken])
 
     
     useEffect(() => {
@@ -122,15 +133,16 @@ export default function Cart() {
                             <h3 style={{ color: "#4a4a4a" }}>{p.record.title}</h3>
                             <p className="cart-indi-des">{p.record.type}</p>
                             <div className="cart-update-qty-box mb-2">
-                                <Button className="cart-update-qty mr-2" onClick={minusQuantity} name={p.record.id} value={p.quantity}>
+                                <Button className="cart-update-qty mr-2" variant='outline-success' onClick={minusQuantity} name={p.record.id} value={p.quantity}>
                                     -
                                     </Button>
                                 {p.quantity}
-                                <Button className="cart-update-qty ml-2" onClick={addQuantity} name={p.record.id} value={p.quantity}>
-                                    <AiOutlinePlusSquare/>
-                                    </Button>
+                                <AiOutlinePlusSquare className="cart-update-qty ml-2" onClick={addQuantity} name={p.record.id} value={p.quantity}>
+                                    </AiOutlinePlusSquare>
+                                    {/* </Button> */}
                             </div>
-                            <Button className="cart-qty-cta mb-1" onClick={deleteFromCart} name={p.record.id}>Delete</Button>
+                            <Button className="cart-qty-cta mb-1" onClick={deleteFromCart} name={p.record.id}>
+                                Delete < RiDeleteBin5Line/></Button>
                             <div className="d-flex justify-content flex-end">
                                 <p>${(p.record.price * p.quantity / 100).toFixed(2)}</p>
                             </div>

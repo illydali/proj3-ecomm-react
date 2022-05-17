@@ -1,20 +1,18 @@
 
 import React, { useContext, useState, useEffect } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { Container, FormControl, Navbar, Dropdown, Nav, Badge, Row, Col, ListGroup, Modal } from 'react-bootstrap'
+import { Container, FormControl, Navbar, Dropdown, Nav, Badge, ListGroup, Modal } from 'react-bootstrap'
 import { BiCart } from 'react-icons/bi'
 import { IoPersonCircleOutline } from 'react-icons/io5'
 import { BsFillVinylFill } from 'react-icons/bs'
 import { BiSearchAlt } from 'react-icons/bi'
 
-// test stuff here
-import { Offcanvas, NavDropdown, Form, Button } from 'react-bootstrap'
+import { Offcanvas, Form, Button } from 'react-bootstrap'
 import UserContext from '../context/UserContext'
 
 import config from '../config'
-
-const BASEURL = config.TEST_API_URL
+const BASEURL = config.BASE_API_URL
 
 export default function Header() {
 
@@ -52,7 +50,7 @@ export default function Header() {
             }
         }
         fetchProfile();
-    }, [accessToken])
+    }, [accessToken]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const getSearch = async () => {
@@ -71,7 +69,7 @@ export default function Header() {
             console.log(result)
         }
         getCart()
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         let totalCost = 0;
@@ -112,61 +110,18 @@ export default function Header() {
                 expand='md' className="mb-3 color-nav" style={{ height: 80 }}>
                 <Container fluid>
                     <Navbar.Brand as={Link} to="/"
+                        className='order-md-0 mx-auto order-1'
                     >
                         <BsFillVinylFill fontSize="25px" />
                         <span> VINYL JUKEBOX</span>
                     </Navbar.Brand>
 
+
                     <Navbar.Toggle
                         aria-controls="offcanvasNavbar-expand"
-
+                        className="order-md-1 order-0"
                     />
-                    <Dropdown>
-                        <Dropdown.Toggle variant='dark'>
-                            <BiCart color='dark' fontSize='20px' />{" "}
-                            <Badge bg='inherit' >
-                                {context.cartItem.reduce((accum, item) => accum + item.quantity, 0)}
-                            </Badge>
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu style={{ minWidth: 325 }}>
 
-                            {context.cartItem.length > 0 ? (
-                                <>
-
-                                    {context.cartItem.map((p) => {
-                                        return (
-                                            <span className="cartitem" key={p.id}>
-                                                <img
-                                                    src={p.record.image_url}
-                                                    className="cartItemImg"
-                                                    alt={p.record.title}
-                                                />
-                                                <div className="cartItemDetail">
-                                                    <span>{p.record.title}</span>
-                                                    <span>{setCurrency(p.record.price)} </span>
-                                                    <span>{p.quantity}</span>{ }
-                                                </div>
-
-                                            </span>
-                                        )
-                                    })}
-                                    <hr />
-                                    <p className='text-center'> SUBTOTAL:
-                                        ${(totalCost / 100).toFixed(2)}  </p>
-                                    <Link to="/cart">
-                                        <Button variant='outline-secondary' style={{ width: "95%", margin: "0 10px" }} >
-                                            Go To Cart
-                                        </Button>
-                                    </Link>
-                                </>
-                            )
-
-                                :
-                                (<>
-                                    <span style={{ padding: 10 }}>Cart is Empty! </span></>)}
-
-                        </Dropdown.Menu>
-                    </Dropdown>
                     <Navbar.Offcanvas
                         id="offcanvasNavbar-expand"
                         aria-labelledby="offcanvasNavbarLabel-expand"
@@ -210,10 +165,11 @@ export default function Header() {
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
+
+                    {/* search icon and modal starts */}
                     <Button variant="outline" onClick={handleShow}>
                         <BiSearchAlt style={{ color: 'white' }} />
                     </Button>
-
                     <Modal show={show} onHide={handleClose} dialogClassName='modal-80w'>
                         <Modal.Header closeButton>
                             <Modal.Title>
@@ -254,8 +210,57 @@ export default function Header() {
                         </Modal.Body>
 
                     </Modal>
+                    {/* search icon and modal ends */}
 
+                    {/* cart dropdown start  */}
+                    <Dropdown>
+                        <Dropdown.Toggle variant='dark'>
+                            
+                            <Badge bg='inherit' >
+                            <BiCart color='dark' fontSize='20px' />
+                                {context.cartItem.reduce((accum, item) => accum + item.quantity, 0)}
+                            </Badge>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu style={{ minWidth: 325 }}>
 
+                            {context.cartItem.length > 0 ? (
+                                <>
+
+                                    {context.cartItem.map((p) => {
+                                        return (
+                                            <span className="cartitem" key={p.id}>
+                                                <img
+                                                    src={p.record.image_url}
+                                                    className="cartItemImg"
+                                                    alt={p.record.title}
+                                                />
+                                                <div className="cartItemDetail">
+                                                    <span>{p.record.title}</span>
+                                                    <span>{setCurrency(p.record.price)} </span>
+                                                    <span>{p.quantity}</span>{ }
+                                                </div>
+
+                                            </span>
+                                        )
+                                    })}
+                                    <hr />
+                                    <p className='text-center'> SUBTOTAL:
+                                        ${(totalCost / 100).toFixed(2)}  </p>
+                                    <Link to="/cart">
+                                        <Button variant='outline-secondary' style={{ width: "95%", margin: "0 10px" }} >
+                                            Go To Cart
+                                        </Button>
+                                    </Link>
+                                </>
+                            )
+
+                                :
+                                (<>
+                                    <span style={{ padding: 10 }}>Cart is Empty! </span></>)}
+
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    {/* cart dropdown ends */}
                 </Container>
             </Navbar>
         </>
