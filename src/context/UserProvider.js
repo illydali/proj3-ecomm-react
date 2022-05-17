@@ -17,13 +17,6 @@ export default function UserProvider(props) {
     const [cartItem, setCartItem] = useState([])
 
     useEffect(() => {
-        const accessTokenStored = localStorage.getItem("accessToken")
-        if (accessTokenStored) {
-            setAccessToken(accessTokenStored);
-        }
-    }, []);
-
-    useEffect(() => {
         setInterval(async () => {
             let refreshToken = localStorage.getItem('refreshToken');
             if (refreshToken) {
@@ -41,20 +34,6 @@ export default function UserProvider(props) {
             }
         }, config.REFRESH_INTERVAL)
     }, []);
-
-    //if accessToken is valid, we retrieve user info
-    useEffect(() => {
-        const profile = async () => {
-            if (accessToken) {
-                let response = await localStorage.getItem("user.id")
-                setUserProfile(response);
-                setLogIn(true);
-            }
-        };
-        if (accessToken) {
-            profile();
-        }
-    }, [accessToken]);
 
     const context = {
         login: async (email, password) => {
@@ -79,22 +58,19 @@ export default function UserProvider(props) {
         },
 
         profile: async () => {
-            const token = localStorage.getItem('accessToken')
-
             const response = await axios.get(BASE_URL + '/users/profile', {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${accessToken}`,
                 }
             })
             if (response.data) {
-                console.log(response.data)
+                console.log(response.data.user)
                 setUserProfile(response.data.user);
                 return response.data.user;
             } else {
                 setUserProfile({})
                 return false;
             }
-
         },
         userProfile,
 
@@ -110,7 +86,7 @@ export default function UserProvider(props) {
                     setUserProfile({});
                     setCartItem([])
                     localStorage.clear()
-                    return true; //logout success
+                    return true; // logout successful
                 }
             } else {
                 return false; //no refresh token

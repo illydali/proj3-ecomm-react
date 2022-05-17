@@ -12,7 +12,6 @@ const BASE_URL = config.TEST_API_URL
 export default function RecordView() {
 
     const { record_id } = useParams();
-    console.log(record_id)
     const [currentRecord, setRecord] = useState({});
     // const [currentRecordID, setCurrentRecordID] = useState(0)
     const [loaded, setLoaded] = useState(false)
@@ -36,6 +35,11 @@ export default function RecordView() {
                 setRecord(response.data);
                 console.log(response.data)
                 setLoaded(true)
+
+                let userId = localStorage.getItem("id")
+                const awaitCart = await context.getCart(userId)
+                context.setCartItem(awaitCart)
+                
             } catch (e) {
                 console.log("Recordview axios error", e);
             }

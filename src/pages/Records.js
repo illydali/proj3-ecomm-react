@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import axios from 'axios'
+
 import {Link} from 'react-router-dom'
 import Loader from '../components/Loader'
 import { Card, CardGroup, Button, Container, Row, Col } from 'react-bootstrap'
@@ -15,6 +15,11 @@ export default function Records() {
     const context = useContext(UserContext)
     const [records, setRecords] = useState([])
 
+    // useEffect has 2 arguments
+    // arg 1: a call back function (aka 'effect')
+    // arg 2: what will cause the arg 1 function to be called
+    // useEffect(() => {
+
     useEffect(() => {
         const getRecords = async () => {
             let result = await context.records()
@@ -23,32 +28,7 @@ export default function Records() {
             setLoaded(true)
         }
         getRecords()
-    }, [])
-
-    // useEffect has 2 arguments
-    // arg 1: a call back function (aka 'effect')
-    // arg 2: what will cause the arg 1 function to be called
-    // useEffect(() => {
-
-    //     // define the function to  use axios to get all the posts
-    //     const fetchRecords = async () => {
-    //         let response = await axios.get("https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us44.gitpod.io/api/records");
-    //         setRecords(response.data);
-    //         setLoaded(true)
-    //     }
-    //     fetchRecords();
-
-    // }, []); // emulate componenetDidMount (activate the effect on rendering the component)
-
-    // useEffect(()=> {
-    //     const fetchAll = () => {
-    //         let tempRec = context.records()
-    //         console.log(tempRec)
-    //         setRecords(tempRec)
-    //         setLoaded(true)
-    //     } 
-    //     fetchAll()
-    // },[])
+    }, []) // emulate componenetDidMount (activate the effect on rendering the component)
 
     function setCurrency(price) {
         let dollars = price / 100;

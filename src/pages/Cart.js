@@ -122,9 +122,13 @@ export default function Cart() {
                             <h3 style={{ color: "#4a4a4a" }}>{p.record.title}</h3>
                             <p className="cart-indi-des">{p.record.type}</p>
                             <div className="cart-update-qty-box mb-2">
-                                <Button className="cart-update-qty mr-2" onClick={minusQuantity} name={p.record.id} value={p.quantity}>-</Button>
+                                <Button className="cart-update-qty mr-2" onClick={minusQuantity} name={p.record.id} value={p.quantity}>
+                                    -
+                                    </Button>
                                 {p.quantity}
-                                <Button className="cart-update-qty ml-2" onClick={addQuantity} name={p.record.id} value={p.quantity}>+</Button>
+                                <Button className="cart-update-qty ml-2" onClick={addQuantity} name={p.record.id} value={p.quantity}>
+                                    <AiOutlinePlusSquare/>
+                                    </Button>
                             </div>
                             <Button className="cart-qty-cta mb-1" onClick={deleteFromCart} name={p.record.id}>Delete</Button>
                             <div className="d-flex justify-content flex-end">
