@@ -86,7 +86,7 @@ export default function Register() {
         }
 
         try {
-            let response = await axios.post(BASE_URL +  'users/register', formState)
+            let response = await axios.post(BASE_URL +  '/users/register', formState)
             console.log(response.data)
 
             if (response.data === "Unable to create user") {

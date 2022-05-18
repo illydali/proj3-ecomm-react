@@ -52,7 +52,6 @@ export default function Cart() {
                 setIsLoggedIn(true)
                 context.setCartItem(response.data)
                 console.log(response.data)
-                console.log(cartItem)
             } else {
                 console.log('none')
 
@@ -115,14 +114,15 @@ export default function Cart() {
         cloned.splice(cartRecordId, 1)
         setCartItem(cloned)
         context.setCartItem(cloned)
+        console.log('delete success')
     }
 
     const renderCartItem = () => {
         let cartRender = []
         cartItem.map(p =>
             cartRender.push(
-                <>
-                    <div className="row mt-2 mb-3" key={p.id}>
+                <React.Fragment key={p.id}>
+                    <div className="row mt-2 mb-3" >
                         <div className="col-12 col-md-4 col-lg-3">
                             <div className="cart-img-container" style={{
                                 backgroundImage: `url(${p.record.image_url})`
@@ -152,7 +152,7 @@ export default function Cart() {
                         </div>
                     </div>
                     <p className="grey-line"></p>
-                </>
+                </React.Fragment>
             ))
         if (cartRender[0] === undefined) {
             cartRender.push(

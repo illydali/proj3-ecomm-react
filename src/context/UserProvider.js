@@ -85,6 +85,7 @@ export default function UserProvider(props) {
             })
             if (response.data) {
                 setUserProfile(response.data.user);
+                setLogIn(true)
                 return response.data.user;
             } else {
                 setUserProfile({})
@@ -129,7 +130,7 @@ export default function UserProvider(props) {
             let response = await axios.get(BASE_URL + "/cart/" + userId)
             if (response.data !== "Unable to get items.") {
                 setCartItem(response.data)
-                console.log(response.data)
+                console.log('getcarthere' , response.data)
                 return response.data
             } else {
                 setCartItem(0)
@@ -147,10 +148,12 @@ export default function UserProvider(props) {
                         Authorization: `Bearer ${token}`,
                     }
                 });
+                setCartItem(cartItem)
+                console.log('is cart thing working?')
                 return (<Alert variant="success">{recordTitle} added to Shopping Cart successfully.</Alert>)
             } catch (e) {
                 console.log("Error add to cart:", e);
-                return (<Alert variant="danger">ERROR: Failed to add product: {recordTitle} to Shopping Cart.</Alert>)
+                return (<Alert variant="danger">ERROR: Failed to add product: {recordTitle} to Shopping Cart. Please log in.</Alert>)
             }
         },
         getAllSuccessOrders: async (userId) => {

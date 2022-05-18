@@ -3,17 +3,29 @@ import { Link } from 'react-router-dom';
 import MainCarousel from "../components/Carousel";
 import UserContext from "../context/UserContext";
 
-import { Card, CardGroup, Button, Row, Col } from 'react-bootstrap'
+import { Card, CardGroup, Button, Row, Col, Container } from 'react-bootstrap'
 
 
 export default function Home() {
     const context = useContext(UserContext)
     const [allRecords, setRecords] = useState([])
+    const [featured, setFeatured] = useState([])
 
     useEffect(() => {
         const getRecords = async () => {
             let result = await context.records()
             console.log(result)
+
+            let allItems = [...result];
+    
+            const randomItems = [];
+            for (let i = 0; i < 4; i++) {
+                const randomIndex = Math.floor(Math.random() * allItems.length);
+                const randomItem = allItems.splice(randomIndex, 1)[0];
+                randomItems.push(randomItem);
+            }
+            setFeatured(randomItems)
+            console.log(randomItems)
             setRecords(result)
         }
         getRecords()
@@ -40,48 +52,88 @@ export default function Home() {
                 </div>
             </div>
 
+            <Container className="mt-3">
+                <div >
+                    <h1 className="text-center fw-bold fs-2">
+                        BESTSELLERS
 
-            <div className="mt-3">
-                <h3 className="text-center fw-bold fs-2">
-                   BESTSELLERS
-                </h3>
-            </div>
-            {/* <div className="scrolling-wrapper row flex-row flex-nowrap flex-lg-wrap m-4 pb-2 pt-2 gap-3 gap-lg-4"></div>
-            <CardGroup>
-                {allRecords.map((p => {
-                    return (<Card key={p.id}>
+                    </h1>
+                </div>
+                <div className="grey-line my-1"></div>
+                <CardGroup className="g-4 p-2">
+                    {
+                        featured.map((p) => {
+                            return (
+                                <Col key={p.id} className='d-flex' xs={12} lg={3}>
 
-                        <Card.Title className="text-center">
-                            {p.title}
-                        </Card.Title>
-                    </Card>)
-                }))}
+                                    <Card border="secondary" style={{ width: '18rem' }} className='card rounded shadow-sm border-0 h-100 mt-2 my-2 flex-fill' >
 
-            </CardGroup> */}
-            <Row>
-                <Col xs={12} md={12} lg={6}>
+                                        <Card.Img variant="top" src={p.image_url} />
+                                        <Card.Body>
 
-                    <div className="home-left-wrapper">
-                    <h5 className="card-title fs-3 text fw-bold lh-lg">Vinyl and all it's wonders</h5>
-                        <p className="px-3 py -4 card-text text-center d-flex align-items-center ">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an 
-                        unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into 
-                        electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-                        </p>
-                    </div>
-                </Col>
-                <Col>
-                    <div className="home-right-wrapper">
-                        <div className="card" style={{ width: '18rem' }}>
-                            <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" className="card-img-center" alt="..." />
-                            
+                                            <Card.Title>{p.title}</Card.Title>
+                                            <Card.Text className="d-flex justify-content-between align-items-center">
+
+                                                {p.artists.name}
+                                                <br />
+                                                {p.labels.name}
+                                                <br />
+                                                {/* {setCurrency(p.price)} */}
+
+                                                <Link variant="outline-secondary" className='suggestion stretched-link' to={"/records/" + p.id}>View Info</Link>
+                                            </Card.Text>
+                                        </Card.Body>
+
+
+                                    </Card>
+
+                                </Col>
+                            )
+                        }
+                        )
+                    }
+
+                    
+                </CardGroup>
+                
+                <div className="text-center py-2 h-50 ">
+                <Button variant='outline-secondary' as={Link} to='/records' > SEE ALL RECORDS </Button>
+                </div>
+               
+                <Row className="mt-3">
+                    <Col xs={12} md={12} lg={6}>
+
+                        <div className="home-left-wrapper">
+                            <h5 className="fs-3 text fw-bold lh-lg text-center py-6">The Vinyl Revival</h5>
+                            <p className="px-3 py-4 card-text text-center d-flex align-items-center ">
+
+                                The analogue format made of polyvinyl chloride had been the main vehicle for the
+                                commercial distribution of pop music from the 1950s until the late 1980s when
+                                it was largely replaced by the compact disc.
+                            </p>
+                            <p className=" text-center">
+                                Since 2007, vinyl records have enjoyed renewed popularity in the West and in East Asia and
+                                vinyl sales began starting its comeback, and by the early 2010s, it was growing at a very quick rate.
+                                Vinyl is now more popular than it has been since the late 1980s,
+                                even with the large number of streaming apps in the market.
+                            </p>
+                            <p className=" text-center">
+                                Along with steadily increasing vinyl sales, the vinyl revival is also evident in the renewed interest in the record shop, the implementation of music charts dedicated solely
+                                to vinyl, and an increased output of films dedicated to the vinyl record and culture. - Wiki
+                            </p>
                         </div>
-                    </div>
+                    </Col>
+                    <Col>
+                        <div className="home-right-wrapper">
+                            <div className="card" >
+                                <img src="https://images.pexels.com/photos/5699509/pexels-photo-5699509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="card-img mw-200 mh-250" alt="A vintage record player" />
 
-                </Col>
-            </Row>
+                            </div>
+                        </div>
 
+                    </Col>
+                </Row>
+            </Container>
         </React.Fragment >
     )
 }

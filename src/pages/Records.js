@@ -185,22 +185,22 @@ export default function Records() {
                             {
                                 records.map((p, ind) => {
                                     return (
-                                        <Col className='d-flex' lg={3}>
+                                        <Col key={ind}  className='d-flex' lg={3}>
 
-                                            <Card key={ind} border="secondary" style={{ width: '18rem' }} className='card rounded shadow-sm border-0 h-100 mt-2 my-2 flex-fill' >
+                                            <Card border="secondary" style={{ width: '18rem' }} className='card rounded shadow-sm border-0 h-100 mt-2 my-2 flex-fill' >
 
                                                 <Card.Img variant="top" src={p.image_url} />
                                                 <Card.Body>
 
                                                     <Card.Title>{p.title}</Card.Title>
-                                                    <Card.Text>
-                                                        <div className="d-flex justify-content-between align-items-center">
+                                                    <Card.Text className="d-flex justify-content-between align-items-center">
+                                                       
                                                             {p.artists.name}
                                                             <br />
                                                             {p.labels.name}
                                                             <br />
                                                             {setCurrency(p.price)}
-                                                        </div>
+                                                        
                                                         <Link variant="outline-secondary" className='suggestion' to={"/records/" + p.id}>View Info</Link>
                                                     </Card.Text>
                                                 </Card.Body>

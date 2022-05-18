@@ -1,9 +1,8 @@
 import React from "react"
-import { Link } from "react-router-dom"
-import { Navbar, Nav } from 'react-bootstrap'
 import { AiFillGithub, AiOutlineCopyright, AiFillFacebook, AiOutlineInstagram } from 'react-icons/ai'
 import { BsTelegram } from 'react-icons/bs'
 import { MdOutlineMailOutline } from 'react-icons/md'
+
 export default function Footer() {
     return (
         <div className="footer-wrapper">

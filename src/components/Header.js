@@ -174,7 +174,7 @@ export default function Header() {
                     </Navbar.Offcanvas>
 
                     {/* search icon and modal starts */}
-                    <Button variant="outline" onClick={handleShow}>
+                    <Button variant="outline" onClick={handleShow} className='order-md-1 order-3'>
                         <BiSearchAlt style={{ color: 'white' }} />
                     </Button>
                     <Modal show={show} onHide={handleClose} dialogClassName='modal-80w'>
@@ -220,8 +220,8 @@ export default function Header() {
                     {/* search icon and modal ends */}
 
                     {/* cart dropdown start  */}
-                    <Dropdown>
-                        <Dropdown.Toggle variant='dark'>
+                    <Dropdown align='end' className='order-md-1 order-3'>
+                        <Dropdown.Toggle variant='dark' size='sm' >
 
                             <Badge bg='inherit' >
                                 <BiCart color='dark' fontSize='20px' />

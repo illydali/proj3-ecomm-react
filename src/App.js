@@ -1,7 +1,7 @@
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import UserProvider from './context/UserProvider'
 import Header from './components/Header';
