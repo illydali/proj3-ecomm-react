@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import moment from 'moment';
+
 import { Container, Form, Button, FloatingLabel, Alert } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import UserContext from '../context/UserContext';
@@ -71,7 +71,7 @@ export default function EditProfile() {
         }
         try {
             let userId = user.id
-            let response = await axios.patch(BASEURL = '/users/update/' + userId, formState)
+            let response = await axios.patch(BASEURL + '/users/update/' + userId, formState)
             console.log(response.data)
 
             if (response.data === "Unable to edit user") {
@@ -193,7 +193,7 @@ export default function EditProfile() {
                                 label="Date of Birth">
                                 <Form.Control
                                     type="date"
-                                    name="birthdate"
+                                    name="birth_date"
                                     value={formState.birth_date}
                                     onChange={updateFormField}
                                 />

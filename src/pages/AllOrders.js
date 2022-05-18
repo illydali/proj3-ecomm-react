@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { Container } from 'react-bootstrap'
+
+import { Link, } from 'react-router-dom'
+import { Container, Alert, Button } from 'react-bootstrap'
 import UserContext from '../context/UserContext'
 
 import config from '../config'
@@ -12,25 +12,7 @@ export default function Orders() {
     const context = useContext(UserContext)
 
     const [orders, setOrders] = useState([]);
-
-    // useEffect(() => {
-    //     const getOrders = async () => {
-    //         let result = await context.getAllSucessOrders()
-    //         console.log(result)
-    //         setOrders(result)
-    //     }
-    //     getOrders()
-    // }, [])
-
-    // useEffect(() => {
-    //     const getUser = async () => {
-    //         let temp = await context.profile()
-    //         setUser(temp)
-    //         console.log(temp)
-    //     }
-    //     getUser()
-    // }, [])
-
+    
     useEffect(() => {
         const getOrder = async () => {
             try {
@@ -63,8 +45,8 @@ export default function Orders() {
         }
         if (lst.length === 0) {
             lst.push(
-               <tr><td> <div>No orders to display.</div></td></tr>
-               
+                <tr><td> <div>No orders to display.</div></td></tr>
+
             )
         }
         return lst
@@ -72,36 +54,43 @@ export default function Orders() {
 
     return (
         <>
-            <Container>
-                <div className="page-width">
-                    <div className="login-wrapper orders-wrapper">
-                        <h1>My Orders </h1>
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Status
-                                    </th>
-                                    <th>
-                                        Placed on
-                                    </th>
-                                    <th>
-                                        Total Paid
-                                    </th>
-                                    <th>
+            <Container className="min-vh-100">
+                {context.logIn === false ? (
+                    <>
+                <Alert> Please log in to view order history. </Alert>
+                    <Button variant='outline-secondary' as={Link} to ='/login'> Login </Button>
+                </>
+                ) : (
+                    <div className="page-width">
+                        <div className="login-wrapper orders-wrapper">
+                            <h1>My Orders </h1>
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            ID
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th>
+                                            Placed on
+                                        </th>
+                                        <th>
+                                            Total Paid
+                                        </th>
+                                        <th>
 
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {displayOrders()}
-                            </tbody>
-                        </table>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {displayOrders()}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                )}
             </Container>
         </>
     )

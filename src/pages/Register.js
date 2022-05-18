@@ -3,8 +3,10 @@ import React, {
 } from 'react';
 import axios from 'axios';
 
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Container, Form, Button, FloatingLabel, Row, Col } from 'react-bootstrap';
+import config from '../config';
+const BASE_URL = config.BASE_API_URL
 
 export default function Register() {
 
@@ -20,7 +22,7 @@ export default function Register() {
         'address': '',
         'password': '',
         'confirmPassword': '',
-        'birthdate': '',
+        'birth_date': '',
         'contact': ''
     })
 
@@ -66,7 +68,7 @@ export default function Register() {
             errorMessage['contactError'] = "Contact number must be 8 characters or more"
         }
 
-        if (!formState.birthdate) {
+        if (!formState.birth_date) {
             isValid = false
             errorMessage['birthdateError'] = "Please choose your date of birth"
         }
@@ -84,7 +86,7 @@ export default function Register() {
         }
 
         try {
-            let response = await axios.post("https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us45.gitpod.io/api/users/register", formState)
+            let response = await axios.post(BASE_URL +  'users/register', formState)
             console.log(response.data)
 
             if (response.data === "Unable to create user") {
@@ -99,11 +101,6 @@ export default function Register() {
                 setRegisterError(false)
                 navigate("/login");
             } 
-
-            // if (response.status === 200) {
-            //     navigate("/login");
-            // }
-
         } catch (err) {
             console.log(err)
         }
@@ -232,8 +229,8 @@ export default function Register() {
                             <Form.Control
                                 required
                                 type="date"
-                                name="birthdate"
-                                value={formState.birthdate}
+                                name="birth_date"
+                                value={formState.birth_date}
                                 onChange={updateFormField}
                             />
                             <div className="error-helper">

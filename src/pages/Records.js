@@ -5,12 +5,10 @@ import Loader from '../components/Loader'
 import { Card, CardGroup, Form, FormControl, Button, Container, Row, Col } from 'react-bootstrap'
 
 import UserContext from '../context/UserContext';
-
-
 import axios from 'axios'
 import config from '../config';
 import Select from 'react-select';
-const BASE_URL = config.TEST_API_URL
+const BASE_URL = config.BASE_API_URL
 export default function Records() {
 
     const [loaded, setLoaded] = useState(false)
@@ -122,22 +120,6 @@ export default function Records() {
         console.log(response.data)
         setRecords(response.data)
     }
-
-    
-
-    // const onChangeHandler = (text) => {
-    //     let findMatch = []
-    //     if (text.length > 0) {
-    //         findMatch = records.filter(s => {
-    //             const regex = new RegExp(`${text}`, "gi")
-    //             return (s.title.match(regex), s.artists.name.match(regex))
-    //         })
-    //     }
-    //     console.log(records)
-    //     console.log('find', findMatch)
-    //     setRecords(findMatch)
-    //     setText(text)
-    // }
 
     const resetSearch = async () => {
         const response = await axios.get(BASE_URL + "/records")

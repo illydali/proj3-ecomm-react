@@ -19,8 +19,6 @@ export default function Home() {
         getRecords()
     }, [])
 
-
-
     return (
         <React.Fragment>
             <div>

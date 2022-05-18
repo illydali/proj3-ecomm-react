@@ -1,15 +1,6 @@
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import axios from 'axios'
-import config from './config'
-import jwt_decode from "jwt-decode";
-
-// import react hooks stuff
-import { useState, useEffect, useContext } from 'react';
-// impport react router stuff
-
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import UserProvider from './context/UserProvider'
@@ -22,16 +13,11 @@ import Cart from './pages/Cart';
 import AllOrders from './pages/AllOrders';
 import Order from './pages/Order';
 import Footer from './components/Footer';
-import Loader from './components/Loader'
 
-import SubmittedForm from './pages/SubmittedForm';
 import RecordView from './pages/RecordView';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
-
-
-
 
 function App() {
 
@@ -45,11 +31,8 @@ function App() {
           <Routes>
             {/* Home route */}
             <Route path="/" element={<Home />} />
-
-            {/* About Us route */}
             <Route path="/login" element={<Login />} />
             <Route path="/records" element={<Records />} />
-            <Route path="/form-submitted" element={<SubmittedForm />} />
             <Route exact path="/records/:record_id" element={<RecordView />} />
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/profile' element={<Profile />} />
