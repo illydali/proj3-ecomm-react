@@ -36,6 +36,25 @@ export default function UserProvider(props) {
         }, config.REFRESH_INTERVAL)
     }, []);
 
+    if (accessToken) {
+        const checkAccesssToken = async () => {
+            const response = await axios.get(BASE_URL + "/users/profile", {
+                headers: {
+                    authorization: "Bearer " + accessToken
+                }
+            })
+            console.log(response.data)
+            console.log(response.data.id)
+            console.log('login verified')
+
+            // see if the id and returning access token is the same
+            if (response.data.id === parseInt(localStorage.getItem('id'))) {
+                setLogIn(true)
+            }
+        }
+        checkAccesssToken()
+    }
+
     const context = {
         login: async (email, password) => {
             console.log("is it working");

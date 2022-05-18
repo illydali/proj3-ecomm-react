@@ -114,7 +114,7 @@ export default function Header() {
     return (
         <>
             <Navbar collapseOnSelect fixed='top' variant='dark'
-                expand='md' className="mb-3 color-nav" style={{ height: 80 }}>
+                expand='md' className="mb-3 color-nav" style={{ height: 100 }}>
                 <Container fluid>
                     <Navbar.Brand as={Link} to="/"
                         className='order-md-0 mx-auto order-1'

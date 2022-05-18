@@ -39,9 +39,10 @@ export default function Login() {
     }
     
     return (<>
-        <Container className="min-vh-100">
+        <Container className="min-vh-200">
+            <div id='login-wrapper'>
             <Form >
-                <Form.Group className="mb-3 justify-content" controlId="formGroupEmail">
+                <Form.Group className="mb-3 mt-4 justify-content" controlId="formGroupEmail">
                     <FloatingLabel
                         controlId="floatingInput"
                         label="Email address"
@@ -92,7 +93,7 @@ export default function Login() {
                  </Link>
                  </Button>
             
-            
+                 </div>
         </Container>
     </>
     )

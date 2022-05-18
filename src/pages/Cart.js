@@ -33,13 +33,13 @@ export default function Cart() {
                 setIsLoggedIn(false)
                 setUser({})
                 setAlertJSX(<Alert>Please login or register.</Alert>)
-                console.log('cart acesss failed' , e)
+                console.log('cart acesss failed', e)
             }
         }
         fetchProfile();
     }, [accessToken])
 
-    
+
     useEffect(() => {
         const fetchCart = async () => {
             let userId = localStorage.getItem("id")
@@ -132,16 +132,20 @@ export default function Cart() {
                             <h3 style={{ color: "#4a4a4a" }}>{p.record.title}</h3>
                             <p className="cart-indi-des">{p.record.type}</p>
                             <div className="cart-update-qty-box mb-2">
-                                <Button className="cart-update-qty mr-2" variant='outline-success' onClick={minusQuantity} name={p.record.id} value={p.quantity}>
+                                <Button className="cart-update-qty mr-2" variant='outline-secondary' size='sm' onClick={minusQuantity} name={p.record.id} value={p.quantity}>
                                     -
-                                    </Button>
-                                {p.quantity}
-                                <AiOutlinePlusSquare className="cart-update-qty ml-2" onClick={addQuantity} name={p.record.id} value={p.quantity}>
-                                    </AiOutlinePlusSquare>
-                                    {/* </Button> */}
+                                </Button>
+                                <div className='px-3'>
+                                    {p.quantity}
+                                </div>
+                                <Button
+                                    variant='outline-secondary' size='sm'
+                                    className="cart-update-qty ml-2" onClick={addQuantity} name={p.record.id} value={p.quantity}>
+                                    +
+                                </Button>
                             </div>
-                            <Button className="cart-qty-cta mb-1" onClick={deleteFromCart} name={p.record.id}>
-                                Delete < RiDeleteBin5Line/></Button>
+                            <Button variant='outline-secondary' size='sm' className="cart-qty-cta mb-1" onClick={deleteFromCart} name={p.record.id}>
+                                Delete < RiDeleteBin5Line /></Button>
                             <div className="d-flex justify-content flex-end">
                                 <p>${(p.record.price * p.quantity / 100).toFixed(2)}</p>
                             </div>
@@ -172,22 +176,30 @@ export default function Cart() {
     }
     else {
         return (<>
-            <Container>
+            <Container className="min-vh-150">
                 <div>
                     <div className="page-width" style={{ display: "block" }}>
-                        <h1 className="mb-2">My Cart</h1>
+                        <h1 className="mt-4 mb-2">My Cart</h1>
+                        <br />
                         {renderCartItem()}
-                        <div className="cart-total-cost">
-                            <p> SUBTOTAL:</p>
-                            <p>  ${(totalCost / 100).toFixed(2)}  </p>
-                        </div>
-                        <div className="cart-checkout">
-                            <a className='suggestion' href={`${baseUrl}/checkout/?user_id=`+localStorage.getItem("id")}>Checkout</a>
+                        <div style={{ display: cartItem.length > 0 ? 'block' : 'none' }}
+                        >
+                            <div className="cart-total-cost">
+                                <p> SUBTOTAL:</p>
+                                <p>  ${(totalCost / 100).toFixed(2)}  </p>
+                            </div>
+                            <div className="cart-checkout">
+
+                                <a className='suggestion fs-4 text-uppercase' href={`${baseUrl}/checkout/?user_id=` + localStorage.getItem("id")}>
+                                    Checkout</a>
+                                <br/>
+                            </div>
+                            <p className='text-center'>You qualify for free shipping!</p>
                         </div>
                     </div>
                 </div>
-                </Container>
-            </>
+            </Container>
+        </>
         )
     }
 }

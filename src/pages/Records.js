@@ -8,6 +8,8 @@ import UserContext from '../context/UserContext';
 import axios from 'axios'
 import config from '../config';
 import Select from 'react-select';
+import { MdOutlineRefresh } from 'react-icons/md'
+
 const BASE_URL = config.BASE_API_URL
 export default function Records() {
 
@@ -19,11 +21,10 @@ export default function Records() {
     const [genres, setGenres] = useState([])
 
     const [searchTitle, setSearchTitle] = useState("")
-    const [searchEngine, setSearchEngine] = useState("")
     const [searchGenre, setSearchGenre] = useState('')
     const [searchLabel, setSearchLabel] = useState([])
 
-    
+
     // useEffect has 2 arguments
     // arg 1: a call back function (aka 'effect')
     // arg 2: what will cause the arg 1 function to be called
@@ -41,7 +42,6 @@ export default function Records() {
     useEffect(() => {
         const getLabels = async () => {
             let result = await axios.get(BASE_URL + '/search/labels');
-            console.log(result.data)
             setLabels(result.data)
         }
         getLabels()
@@ -62,23 +62,15 @@ export default function Records() {
     })
 
     const handleLabelChange = (selectedOptions) => {
-        console.log(
-            'option :', selectedOptions
-        )
         let labelArray = [];
-
         selectedOptions.map(o =>
             labelArray.push(o.value))
         setSearchLabel(labelArray)
-        console.log(labelArray)
-
     };
 
     // https://www.freecodecamp.org/news/how-to-send-the-right-data-type-from-a-form-to-the-backend-server/
     const handleGenreChange = (options) => {
-        console.log(
-            'option :', options)
-       // create a new array with the key value that you want
+        // create a new array with the key value that you want
         const mappedOptions = options.map(option => option.value)
         console.log(mappedOptions) // ['Worker', 'Manager']
 
@@ -94,7 +86,6 @@ export default function Records() {
     useEffect(() => {
         const getGenres = async () => {
             let result = await axios.get(BASE_URL + '/search/genres');
-            console.log(result.data)
             setGenres(result.data)
         }
         getGenres()
@@ -113,18 +104,13 @@ export default function Records() {
         if (searchGenre !== '') {
             searchQuery.genres = searchGenre
         }
-
-        console.log(searchGenre)
-
         const response = await axios.post(BASE_URL + "/search/filters", searchQuery)
-        console.log(response.data)
         setRecords(response.data)
     }
 
     const resetSearch = async () => {
         const response = await axios.get(BASE_URL + "/records")
         setRecords(response.data)
-        setSearchEngine('')
         setSearchLabel([])
         setSearchTitle('')
         setSearchGenre('')
@@ -138,7 +124,6 @@ export default function Records() {
         })
         return dollars
     }
-
 
     return (
         <Container className="min-vh-100">
@@ -154,37 +139,32 @@ export default function Records() {
                             </p>
                         </div>
                     </div>
-                    <Row>
-                    <Col>
-                        <Form className="d-flex justify-content">
-                                    <FormControl
-                                        type="text"
-                                        width='auto'
-                                        placeholder="Search"
-                                        className="me-2"
-                                        aria-label="Search"
-                                        onChange={((e) => setSearchTitle(e.target.value))}
-                                        value={searchTitle}
-                                       
-                                    />
-
-                                </Form>
+                    <Row className="justify-content-md-center">                        
+                        <Col sm={12} lg={3} md={3} className='p-1'>
+                            <Form>
+                                <FormControl
+                                    type="text"
+                                    width='auto'
+                                    placeholder="Search"
+                                    className="me-2"
+                                    aria-label="Search"
+                                    onChange={((e) => setSearchTitle(e.target.value))}
+                                    value={searchTitle}
+                                />
+                            </Form>
                         </Col>
-                        </Row> 
-                    <Row d-flex>
-                        <Col  >
+
+                        <Col sm={12} lg={3} md={3} className='p-1'>
                             <Select
                                 isMulti
                                 isClearable
                                 placeholder='Search by Labels'
                                 options={optionLabels}
                                 onChange={handleLabelChange}
-                               
-                               
                             />
                         </Col>
-                        
-                        <Col>
+
+                        <Col sm={12} lg={3} md={3} className='p-1'>
                             <Select
                                 isMulti
                                 options={optionGenres}
@@ -193,9 +173,11 @@ export default function Records() {
                             />
 
                         </Col>
-                        <Col>
-                        <button type="submit" onClick={getSearch}>Search</button>
-                        <Button type="submit" onClick={resetSearch}>Reset</Button>
+                        <Col sm={12} lg={3} md={3}>
+                            <div className='text-center p-1'>
+                            <Button variant='outline-secondary rounded-pill sm' type="submit" onClick={getSearch}>Search</Button>
+                            <MdOutlineRefresh fontSize="30px" type="submit" onClick={resetSearch} />
+                            </div>
                         </Col>
                     </Row>
                     <Row className="g-4" >
@@ -219,7 +201,7 @@ export default function Records() {
                                                             <br />
                                                             {setCurrency(p.price)}
                                                         </div>
-                                                        <Link variant="outline-secondary" className='text-italic' to={"/records/" + p.id}>See More</Link>
+                                                        <Link variant="outline-secondary" className='suggestion' to={"/records/" + p.id}>View Info</Link>
                                                     </Card.Text>
                                                 </Card.Body>
 

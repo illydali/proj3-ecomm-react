@@ -25,9 +25,9 @@ export default function Footer() {
                             <h5 className="text-uppercase">info</h5>
                             <ul className="list-unstyled">
                                 <li><a href="#!">Why Vinyl?</a></li>
-                                <li><a href="#!">Link 2</a></li>
-                                <li><a href="#!">Link 3</a></li>
-                                <li><a href="#!">Link 4</a></li>
+                                <li><a href="#!">Our History</a></li>
+                                <li><a href="#!">Blog</a></li>
+                                <li><a href="#!">FAQs</a></li>
                             </ul>
                         </div>
 

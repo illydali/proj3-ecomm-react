@@ -4,16 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import UserProvider from './context/UserProvider'
-
 import Header from './components/Header';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+
 import Home from './pages/Home'
 import Records from './pages/Records';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
 import AllOrders from './pages/AllOrders';
 import Order from './pages/Order';
-import Footer from './components/Footer';
-
 import RecordView from './pages/RecordView';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
@@ -27,6 +27,7 @@ function App() {
         <Router>
 
           <Header />
+          <ScrollToTop />
 
           <Routes>
             {/* Home route */}
