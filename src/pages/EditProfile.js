@@ -6,6 +6,8 @@ import { Container, Form, Button, FloatingLabel, Alert } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import UserContext from '../context/UserContext';
 
+import config from '../config';
+const BASEURL = config.BASE_API_URL
 
 export default function EditProfile() {
 
@@ -69,7 +71,7 @@ export default function EditProfile() {
         }
         try {
             let userId = user.id
-            let response = await axios.patch("https://8080-illydali-proj3ecomm-qpnijq6y2hg.ws-us45.gitpod.io/api/users/update/" + userId, formState)
+            let response = await axios.patch(BASEURL = '/users/update/' + userId, formState)
             console.log(response.data)
 
             if (response.data === "Unable to edit user") {

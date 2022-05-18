@@ -135,6 +135,9 @@ export default function UserProvider(props) {
             }
         },
         getAllSuccessOrders: async (userId) => {
+            if (!userId) {
+                userId = localStorage.getItem("id")
+            }
             let response = await axios.get(BASE_URL + '/orders/allorders/' + userId);
             if (response.data) {
                 return response.data

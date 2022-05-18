@@ -63,19 +63,17 @@ export default function Header() {
     }, [])
 
     useEffect(() => {
-       
         const getCart = async () => {
-
-            let userId = localStorage.getItem("id")
-            console.log(userId)
             if (context.logIn) {
+                let userId = localStorage.getItem("id")
+                console.log(userId)
                 let result = await context.getCart(userId)
                 setCart(result)
                 console.log(result)
             }
             else {
                 console.log('no cart yet')
-            } 
+            }
         }
         getCart()
     }, []) // eslint-disable-line react-hooks/exhaustive-deps

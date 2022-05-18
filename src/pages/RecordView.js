@@ -7,13 +7,12 @@ import Loader from '../components/Loader'
 
 import config from '../config';
 import UserContext from '../context/UserContext';
-const BASE_URL = config.TEST_API_URL
+const BASE_URL = config.BASE_API_URL
 
 export default function RecordView() {
 
     const { record_id } = useParams();
     const [currentRecord, setRecord] = useState({});
-    // const [currentRecordID, setCurrentRecordID] = useState(0)
     const [loaded, setLoaded] = useState(false)
     const context = useContext(UserContext)
     const [user, setUser] = useState({})
@@ -49,7 +48,6 @@ export default function RecordView() {
 
     const addToCart = async (userId, recordId, recordTitle) => {
         let response = await context.addToCart(userId, recordId, recordTitle);
-        console.log(response.data)
         setAlertJSX(response)
     }
 

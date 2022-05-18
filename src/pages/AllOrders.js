@@ -31,15 +31,12 @@ export default function Orders() {
     //     getUser()
     // }, [])
 
-
-    
     useEffect(() => {
         const getOrder = async () => {
             try {
-                let userId = localStorage.getItem("id")
-                let result = await axios.get(baseURL + '/orders/allorders/' + userId)
-                console.log(result.data)
-                setOrders(result.data)
+                let result = await context.getAllSuccessOrders()
+                console.log(result)
+                setOrders(result)
             } catch (e) {
                 console.log(e)
             }
