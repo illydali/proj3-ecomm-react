@@ -29,7 +29,6 @@ export default function Cart() {
                 let response = await context.profile()
                 setUser(response);
                 setIsLoggedIn(true)
-                console.log(response);
             } catch (e) {
                 setIsLoggedIn(false)
                 setUser({})

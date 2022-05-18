@@ -22,6 +22,8 @@ export default function Header() {
     const [cart, setCart] = useState([])
     const [totalCost, setTotalCost] = useState(0)
     const [search, setSearch] = useState([])
+
+    // quick search modal
     const [show, setShow] = useState(false);
     const [text, setText] = useState("");
     const [suggestions, setSuggestions] = useState([]);
@@ -39,7 +41,7 @@ export default function Header() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                console.log("Use effect for header works")
+                console.log("check")
                 let response = await context.profile()
                 setUser(response);
                 setLoggedIn(true)
@@ -55,18 +57,25 @@ export default function Header() {
     useEffect(() => {
         const getSearch = async () => {
             let response = await axios.get(BASEURL + '/search')
-            console.log(response.data)
             setSearch(response.data)
         }
         getSearch()
     }, [])
 
     useEffect(() => {
-        let userId = localStorage.getItem("id")
+       
         const getCart = async () => {
-            let result = await context.getCart(userId)
-            setCart(result)
-            console.log(result)
+
+            let userId = localStorage.getItem("id")
+            console.log(userId)
+            if (context.logIn) {
+                let result = await context.getCart(userId)
+                setCart(result)
+                console.log(result)
+            }
+            else {
+                console.log('no cart yet')
+            } 
         }
         getCart()
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -215,9 +224,9 @@ export default function Header() {
                     {/* cart dropdown start  */}
                     <Dropdown>
                         <Dropdown.Toggle variant='dark'>
-                            
+
                             <Badge bg='inherit' >
-                            <BiCart color='dark' fontSize='20px' />
+                                <BiCart color='dark' fontSize='20px' />
                                 {context.cartItem.reduce((accum, item) => accum + item.quantity, 0)}
                             </Badge>
                         </Dropdown.Toggle>

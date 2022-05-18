@@ -49,8 +49,6 @@ export default function UserProvider(props) {
                 localStorage.setItem('id', response.data.user.id)
                 setLogIn(true);
                 setUserProfile(response.data)
-                console.log("response data")
-                console.log(response.data)
                 return true;
             } else {
                 setLogIn(false);
@@ -58,6 +56,7 @@ export default function UserProvider(props) {
                 localStorage.clear()
             }
         },
+        logIn,
         profile: async () => {
             let profileToken = localStorage.getItem('accessToken')
             const response = await axios.get(BASE_URL + '/users/profile', {
@@ -66,7 +65,6 @@ export default function UserProvider(props) {
                 }
             })
             if (response.data) {
-                console.log(response.data.user)
                 setUserProfile(response.data.user);
                 return response.data.user;
             } else {
@@ -105,13 +103,18 @@ export default function UserProvider(props) {
             }
         },
         getCart: async (userId) => {
+
+            if (!userId) {
+                userId = localStorage.getItem("id")
+            }
             let response = await axios.get(BASE_URL + "/cart/" + userId)
             if (response.data !== "Unable to get items.") {
                 setCartItem(response.data)
                 console.log(response.data)
                 return response.data
             } else {
-                console.log('none')
+                setCartItem(0)
+                console.log('pls. log in')
             }
         },
         setCartItem,

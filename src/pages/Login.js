@@ -29,6 +29,7 @@ export default function Login() {
             let result = await context.login(email, password);
             console.log(result);
             setLogin(true)
+            context.getCart()
             navigate('/profile')
         } catch(e) {
             setUnableToLogin(true)
