@@ -23,10 +23,10 @@ export default function Footer() {
                         <div className="col-md-3 mb-md-0 mb-3">
                             <h5 className="text-uppercase">info</h5>
                             <ul className="list-unstyled">
-                                <li><a href="#">Why Vinyl?</a></li>
-                                <li><a href="#">Our History</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">FAQs</a></li>
+                                <li><a href="/#" target="_blank" rel="noopener noreferrer">Why Vinyl?</a></li>
+                                <li><a href="/#">Our History</a></li>
+                                <li><a href="/#">Blog</a></li>
+                                <li><a href="/#">FAQs</a></li>
                             </ul>
                         </div>
 

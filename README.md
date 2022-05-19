@@ -181,15 +181,45 @@ This font was selected to give off an analog vibe relating to the website brand.
 
 # Credits
 
+[Record Loader](https://github.com/digisz/trnt)
+
+[Stack Overflow](https://stackoverflow.com/) 
+
 All photos and content are sourced and adapted from 
 [Pexels.com](https://www.pexels.com/)
+
 [The Analog Vault](https://theanalogvault.com/)
+
 [The Sound of Vinyl](https://thesoundofvinyl.com/)
+
 [eBay](https://www.ebay.com/b/Vinyl-Records/176985/bn_1860303)
+
+Any other credits not listed here for code snippets are documented in source files above the code 
 
 Repository for server side and Admin access can be found [here](https://github.com/illydali/proj3-ecomm)
 
-Deployment is done on [Heroku](https://www.heroku.com/) and [Netlify](https://www.netlify.com/). 
+# Deployment 
+
+Server-side is hosted on [Heroku](https://www.heroku.com/). 
+Client-side is hosted on [Netlify](https://www.netlify.com/).
+
+For deploying React app to Netlify, use the following settings:
+
+- Base directory: Not set
+
+- Build command: CI=false npm run build
+
+- Publish directory: build
+
+If using react-router-dom add in the following before deploying 
+Go to public folder - add new file 
+```
+_redirects
+```
+Add following in file 
+```javascript
+/* /index.html 200
+```
 
 # Acknowledgements
 Lecturer [Paul Chor](https://github.com/kunxin-chor) for imparting his skills.

@@ -16,6 +16,8 @@ export default function Home() {
             let result = await context.records()
             let allItems = [...result];
 
+            // https://stackoverflow.com/questions/63280808/rendering-random-elements-from-an-array-in-react
+            
             const randomItems = [];
             for (let i = 0; i < 4; i++) {
                 const randomIndex = Math.floor(Math.random() * allItems.length);
