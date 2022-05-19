@@ -64,7 +64,7 @@ export default function Order() {
                 <Loader />
                 :
                 <Container>
-                <div className="page-width" style={{ display: "block" }}>
+                <div className="page-width mt-3" style={{ display: "block" }}>
                     <h1>Order Information</h1>
                     <p className="grey-line"></p>
                     <table key={orderView.id}>
