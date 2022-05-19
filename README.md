@@ -19,7 +19,7 @@ Admin - https://illy-vinylshop.herokuapp.com/
 Please note that Heroku will take up to 30 seconds to load.
 
 # Strategy
-In recents years vinyl records have dramatically increased in popularity - even outselling digital music. Many new releases are available on vinyl and even older releases are now being reissued on vinyl. With the exception of large, international sites such as Discogs, or non-specialist sites such as eBay there is little in the way of sites that focus on the secondhand and collectible record trade.
+In recents years vinyl records have dramatically increased in popularity - even outselling digital music. Many new releases are available on vinyl and even older releases are now being reissued on vinyl. While large, international sites such as Discogs, or non-specialist sites such as eBay focus on the secondhand and collectible record trade, there is little in the way of sites that focus on the new releases of vinyl.
 
 #### Target Audience
 - Music lovers
@@ -29,6 +29,8 @@ In recents years vinyl records have dramatically increased in popularity - even 
 
 ### Site Owner Goals
 As a site owner, I aim to cater to lovers and collectors of vinyl records so that they have the option to view, select and purchase the records from the comfort of home. 
+
+As a site owner, I want to ensure a collection of visually pleasing new released records for customers to access. 
 
 ### User Goals
 
@@ -57,7 +59,7 @@ As a vintage decor fan, I want a seamless site where I can browse through and vi
 ### Content 
 
 1. Home page showcases 'BESTSELLER' heading that is sorted into 4 random products each time page is loaded 
-2. Single record view lists product specs, record discription and record label name with thumbnail image 
+2. Single record view lists product specs, record description and record label name with thumbnail image 
 3. Shopping cart page shows berakdown of items added by quantity and subtotal 
 4. Order history page allows user to view all previous orders by clicking on button link 
 
@@ -131,18 +133,19 @@ This font was selected to give off an analog vibe relating to the website brand.
 2. Guest selects a record. 
     - User is brought to single record view. 
 3. Guest clicks add to cart. 
-    - Alert in red prompts, asking guest to login and retry.
+    - Alert in red prompts, asking user to login and retry.
 4. Guest clicks on login link, then click on signup link. Guest enters required information. Validation helpers for form controls will prompt if fields are not acceptable. 
     - User is able to sign up, user is brought to login page. 
 
 #### Known issues
 1. User might be automatically logged out if page is refreshed though this does not occur all the time. 
-2. Most times cart icon tabulates and shows the correct number of items however there are instances where the cart seems to lag. The surest way to get the updated info right now is to click on View Cart page accessed via cart icon dropdown or profile page. 
+2. Most times cart icon tabulates and shows the correct number of items however there are instances where the cart seems to lag. For now, the best way to get the updated info is to click on View Cart page accessed via cart icon dropdown or profile page.  
 
 ## Future Implementations
 
 ### Frontend
 
+- Automatically logging in a new customer if registration is successful and redirecting to home page instead 
 - Implementing pagination for better customer experience
 - Adding more search filters to allow customers to find their desired product faster
 - Adding add/subtract/delete cart information on cart icon dropdown
@@ -151,7 +154,7 @@ This font was selected to give off an analog vibe relating to the website brand.
 ### Backend
 - Allowing access for different admin levels
 - Adding a quantity overview page for stock keeping
-- Allowing admin to verify that stock is available before comfirming orders 
+- Allowing admin to verify that stock is available before confirming orders 
 - Allowing admin to edit customer list
 
 # Technologies
@@ -187,10 +190,12 @@ All photos and content are sourced and adapted from
 Repository for server side and Admin access can be found [here](https://github.com/illydali/proj3-ecomm)
 
 Deployment is done on [Heroku](https://www.heroku.com/) and [Netlify](https://www.netlify.com/). 
-# Acknowledgement
+
+# Acknowledgements
 Lecturer [Paul Chor](https://github.com/kunxin-chor) for imparting his skills.
 
 TAs Ace, Haryati and Chen Yun for being patient and spending time to figure out our bugs.
 
 The class of TGC16 for always being ready to share all knowledge, shortcuts and problem-fixes. 
 
+*Data used in the development of this website is for educational purposes only and may or may not be accurate.*
