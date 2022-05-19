@@ -201,7 +201,7 @@ export default function Records() {
                                                             <br />
                                                             {setCurrency(p.price)}
                                                         
-                                                        <Link variant="outline-secondary" className='suggestion' to={"/records/" + p.id}>View Info</Link>
+                                                        <Link variant="outline-secondary" className='suggestion stretched-link' to={"/records/" + p.id}>View Info</Link>
                                                     </Card.Text>
                                                 </Card.Body>
 

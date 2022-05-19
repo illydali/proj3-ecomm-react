@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 
 import axios from 'axios'
 import { Container, Alert, Button } from 'react-bootstrap'
-import { AiOutlinePlusSquare } from 'react-icons/ai'
 import { RiDeleteBin5Line } from 'react-icons/ri'
 import Loader from '../components/Loader'
 import UserContext from '../context/UserContext'
@@ -18,8 +17,6 @@ export default function Cart() {
     const [totalCost, setTotalCost] = useState(0)
     const [user, setUser] = useState({})
 
-    const [alertJSX, setAlertJSX] = useState();
-
     const accessToken = localStorage.getItem('accessToken');
 
     useEffect(() => {
@@ -32,7 +29,6 @@ export default function Cart() {
             } catch (e) {
                 setIsLoggedIn(false)
                 setUser({})
-                setAlertJSX(<Alert>Please login or register.</Alert>)
                 console.log('cart acesss failed', e)
             }
         }

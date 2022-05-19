@@ -60,7 +60,7 @@ export default function Orders() {
                 </>
                 ) : (
                     <div className="page-width">
-                        <div className="login-wrapper orders-wrapper">
+                        <div className="profile-wrapper p-2">
                             <h1>My Orders </h1>
                             <table className="table">
                                 <thead>
@@ -83,7 +83,9 @@ export default function Orders() {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     {displayOrders()}
+                                 
                                 </tbody>
                             </table>
                         </div>

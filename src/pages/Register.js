@@ -4,7 +4,7 @@ import React, {
 import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom'
-import { Container, Form, Button, FloatingLabel, Row, Col } from 'react-bootstrap';
+import { Container, Form, Button, FloatingLabel } from 'react-bootstrap';
 import config from '../config';
 const BASE_URL = config.BASE_API_URL
 
@@ -108,8 +108,8 @@ export default function Register() {
 
     return (
         <>
-            <Container>
-                <Form>
+            <Container className="min-vh-200">
+                <Form className='mt-3'>
                 <div>
                 <p className="error-helper"
                     style={{ display: emailRegistered === true ? "block" : "none" }}>

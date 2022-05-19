@@ -1,6 +1,6 @@
 
 import React, { useContext, useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Container, FormControl, Navbar, Dropdown, Nav, Badge, ListGroup, Modal } from 'react-bootstrap'
 import { BiCart } from 'react-icons/bi'
@@ -64,8 +64,9 @@ export default function Header() {
 
     useEffect(() => {
         const getCart = async () => {
-            if (context.logIn) {
-                let userId = localStorage.getItem("id")
+            if (loggedIn) {
+                let userId = user.id
+                console.log('works or not')
                 console.log(userId)
                 let result = await context.getCart(userId)
                 setCart(result)
@@ -137,8 +138,8 @@ export default function Header() {
                     >
                         <Offcanvas.Header closeButton>
                             <Offcanvas.Title id="offcanvasNavbarLabel-expand">
-                                {/* to change later */}
-                                <IoPersonCircleOutline fontSize="30px" />
+                                <BsFillVinylFill fontSize="25px" />
+                                <span> VINYL JUKEBOX</span>
                             </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
@@ -203,15 +204,15 @@ export default function Header() {
                             <p>Search Results</p>
                             {suggestions && suggestions.map((sug) => {
                                 return (
-                                    <>
-                                        <ListGroup variant="flush" key={sug.id} >
+                                    <React.Fragment key={sug.id} >
+                                        <ListGroup variant="flush" >
                                             <ListGroup.Item>{sug.title}
                                                 <br />
                                                 <Link variant='outline-secondary' className='suggestion' to={'/records/' + sug.id} onClick={handleClose}>view item</Link>
                                             </ListGroup.Item>
                                         </ListGroup>
 
-                                    </>
+                                    </React.Fragment>
                                 )
                             })}
                         </Modal.Body>

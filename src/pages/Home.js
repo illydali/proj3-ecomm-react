@@ -14,10 +14,8 @@ export default function Home() {
     useEffect(() => {
         const getRecords = async () => {
             let result = await context.records()
-            console.log(result)
-
             let allItems = [...result];
-    
+
             const randomItems = [];
             for (let i = 0; i < 4; i++) {
                 const randomIndex = Math.floor(Math.random() * allItems.length);
@@ -25,7 +23,6 @@ export default function Home() {
                 randomItems.push(randomItem);
             }
             setFeatured(randomItems)
-            console.log(randomItems)
             setRecords(result)
         }
         getRecords()
@@ -65,15 +62,11 @@ export default function Home() {
                         featured.map((p) => {
                             return (
                                 <Col key={p.id} className='d-flex' xs={12} lg={3}>
-
                                     <Card border="secondary" style={{ width: '18rem' }} className='card rounded shadow-sm border-0 h-100 mt-2 my-2 flex-fill' >
-
                                         <Card.Img variant="top" src={p.image_url} />
                                         <Card.Body>
-
                                             <Card.Title>{p.title}</Card.Title>
                                             <Card.Text className="d-flex justify-content-between align-items-center">
-
                                                 {p.artists.name}
                                                 <br />
                                                 {p.labels.name}
@@ -83,23 +76,20 @@ export default function Home() {
                                                 <Link variant="outline-secondary" className='suggestion stretched-link' to={"/records/" + p.id}>View Info</Link>
                                             </Card.Text>
                                         </Card.Body>
-
-
                                     </Card>
-
                                 </Col>
                             )
                         }
                         )
                     }
 
-                    
+
                 </CardGroup>
-                
+
                 <div className="text-center py-2 h-50 ">
-                <Button variant='outline-secondary' as={Link} to='/records' > SEE ALL RECORDS </Button>
+                    <Button variant='outline-secondary' as={Link} to='/records' > SEE ALL RECORDS </Button>
                 </div>
-               
+
                 <Row className="mt-3">
                     <Col xs={12} md={12} lg={6}>
 

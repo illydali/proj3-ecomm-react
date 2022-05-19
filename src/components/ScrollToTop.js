@@ -33,7 +33,8 @@ export default function ScrollToTop() {
                 right: '50px',
                 height:  '50px',
                 width: '50px',
-                fontSize: '50px'
+                fontSize: '50px',
+                color: 'yellow'
             }}
                 onClick={scrollTop}
                 /> 
