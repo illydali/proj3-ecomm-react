@@ -77,7 +77,7 @@ export default function Header() {
             }
         }
         getCart()
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [loggedIn]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         let totalCost = 0;

@@ -17,7 +17,7 @@ export default function ScrollToTop() {
 
     const scrollTop = () => {
         window.scrollTo({
-            top: 100,
+            top: 50,
             behavior: 'smooth'
         })
     }
@@ -34,7 +34,7 @@ export default function ScrollToTop() {
                 height:  '50px',
                 width: '50px',
                 fontSize: '50px',
-                color: 'yellow'
+                color: 'darkolivegreen'
             }}
                 onClick={scrollTop}
                 /> 

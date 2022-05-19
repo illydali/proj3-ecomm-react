@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Container, Alert, Button } from 'react-bootstrap'
 import { RiDeleteBin5Line } from 'react-icons/ri'
@@ -161,41 +161,37 @@ export default function Cart() {
     }
 
 
-    if (loaded === false) {
-        return <Loader />
-    }
-    else if (loaded === true && isLoggedIn === false) {
-        return (
-            <div>Redirecting to Login Page...</div>
+    return (<>
+        {isLoggedIn === false ?
+            <>
+                <Alert> Please log in to your account. </Alert>
+                <Button variant='outline-secondary' as={Link} to='/login'> Login </Button>
+            </>
+            : (
+                <Container className="min-vh-150">
+                    <div>
+                        <div className="page-width" style={{ display: "block" }}>
+                            <h1 className="mt-4 mb-2">My Cart</h1>
+                            <br />
+                            {renderCartItem()}
+                            <div style={{ display: cartItem.length > 0 ? 'block' : 'none' }}
+                            >
+                                <div className="cart-total-cost">
+                                    <p> SUBTOTAL:</p>
+                                    <p>  ${(totalCost / 100).toFixed(2)}  </p>
+                                </div>
+                                <div className="cart-checkout">
 
-        )
-    }
-    else {
-        return (<>
-            <Container className="min-vh-150">
-                <div>
-                    <div className="page-width" style={{ display: "block" }}>
-                        <h1 className="mt-4 mb-2">My Cart</h1>
-                        <br />
-                        {renderCartItem()}
-                        <div style={{ display: cartItem.length > 0 ? 'block' : 'none' }}
-                        >
-                            <div className="cart-total-cost">
-                                <p> SUBTOTAL:</p>
-                                <p>  ${(totalCost / 100).toFixed(2)}  </p>
+                                    <a className='suggestion fs-4 text-uppercase' href={`${baseUrl}/checkout/?user_id=` + localStorage.getItem("id")}>
+                                        Checkout</a>
+                                    <br />
+                                </div>
+                                <p className='text-center'>You qualify for free shipping!</p>
                             </div>
-                            <div className="cart-checkout">
-
-                                <a className='suggestion fs-4 text-uppercase' href={`${baseUrl}/checkout/?user_id=` + localStorage.getItem("id")}>
-                                    Checkout</a>
-                                <br/>
-                            </div>
-                            <p className='text-center'>You qualify for free shipping!</p>
                         </div>
                     </div>
-                </div>
-            </Container>
-        </>
-        )
-    }
+                </Container>
+            )}
+    </>
+    )
 }

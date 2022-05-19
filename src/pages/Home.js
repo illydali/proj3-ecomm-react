@@ -28,6 +28,15 @@ export default function Home() {
         getRecords()
     }, [])
 
+    function setCurrency(price) {
+        let dollars = price / 100;
+        dollars = dollars.toLocaleString("en-SG", {
+            style: "currency",
+            currency: "SGD"
+        })
+        return dollars
+    }
+
     return (
         <React.Fragment>
             <div>
@@ -71,9 +80,8 @@ export default function Home() {
                                                 <br />
                                                 {p.labels.name}
                                                 <br />
-                                                {/* {setCurrency(p.price)} */}
-
-                                                <Link variant="outline-secondary" className='suggestion stretched-link' to={"/records/" + p.id}>View Info</Link>
+                                                {setCurrency(p.price)}
+                                                <Link variant="outline-secondary" className='suggestion stretched-link' to={"/records/" + p.id}>View</Link>
                                             </Card.Text>
                                         </Card.Body>
                                     </Card>

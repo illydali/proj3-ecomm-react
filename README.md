@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# Full Stack E-commerce Web Development 
+# The Vinyl Jukebox 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a full stack e-commerce project built for educational purposes. The frontend development is built using the 5 planes of UX Design. This site is built on ReactJS. 
 
-## Available Scripts
+## Live Access 
 
-In the project directory, you can run:
+E-commerce - https://the-vinyl-jukebox.netlify.app/
 
-### `npm start`
+![Resonsive Views](public/res_views.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Admin Site
+Admin - https://illy-vinylshop.herokuapp.com/
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Email | Password    |                
+| :-------- | :------- | 
+| `rotijohn@gemail.com` | `rotijohn` |  
 
-### `npm test`
+Please note that Heroku will take up to 30 seconds to load.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Strategy
+In recents years vinyl records have dramatically increased in popularity - even outselling digital music. Many new releases are available on vinyl and even older releases are now being reissued on vinyl. With the exception of large, international sites such as Discogs, or non-specialist sites such as eBay there is little in the way of sites that focus on the secondhand and collectible record trade.
 
-### `npm run build`
+#### Target Audience
+- Music lovers
+- Collectors
+- Musicians/DJs
+- Vintage decorators
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Site Owner Goals
+As a site owner, I aim to cater to lovers and collectors of vinyl records so that they have the option to view, select and purchase the records from the comfort of home. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### User Goals
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+As a user of the website, I want to be able to easily find the latest LP releases so that I can save time from going down in person.
 
-### `npm run eject`
+As a user of the website, I want somewhere where I am able to browse LPs by labels or genres without leaving the comfort of my home. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+As a vinyl record collector, I want to have a website that is easy to search, shop and pay for my purchases. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+As a vintage decor fan, I want a seamless site where I can browse through and view each pic of the album sleeve without having to deep dive endlessly at a physical store.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Scope
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Functional
 
-## Learn More
+1. Call to Action brings user to full products page. 
+2. Quick Search modal
+3. Search filters 
+- By titles
+- By labels
+- By genres
+4. Dynamic shopping cart with quicklink to checkout page
+5. Login/Register pages 
+6. Protected edit profile/view order history route 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Non-functional
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Mobile responsiveness
+2. Navbar drawer
+2. Loading spinner
+3. Footer 
+4. Scroll to top button 
 
-### Code Splitting
+# Structure 
+Logical Schema that the website and database was built on, 
+![Final Schema](public/final_vjb_schema.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Skeleton 
+Basic skeleton 
+![Skeleton](public/vjb_layout.png)
 
-### Analyzing the Bundle Size
+# Surface
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The design strategy for the website is to exude a vintage analog feel. This also helps in allowing the photos of the album sleeves to stand out thus catering to vintage collectors and music lovers at the same time. 
 
-### Making a Progressive Web App
+## Color scheme 
+Selected Monochrome colors 
+![Color Scheme](public/vjb_colors.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Font
+Inconsolata from [Google Fonts](https://fonts.google.com/specimen/Inconsolata?preview.text=vinyl%20shop&preview.text_type=custom#standard-styles)
 
-### Advanced Configuration
+# Technologies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+ReactJs - React Hooks,Context API, React-router-Dom
 
-### Deployment
+React-Bootstrap, Bootstrap 5.1, react-select, react-icons 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Postgres 
 
-### `npm run build` fails to minify
+Stripe API 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MomentJS
+
+# Credits
+Photos and content are sourced and adapted from 
+[Pexels.com](https://www.pexels.com/)
+[The Analog Vault](https://theanalogvault.com/)
+[The Sound of Vinyl](https://thesoundofvinyl.com/)
+[eBay](https://www.ebay.com/b/Vinyl-Records/176985/bn_1860303)
+

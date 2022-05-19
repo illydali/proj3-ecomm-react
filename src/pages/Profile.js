@@ -23,7 +23,6 @@ export default function Profile() {
             setUser(response);
             setLoggedIn(true)
             setLoaded(true)
-            console.log(response);
         }
         fetchProfile();
     }, [accessToken])
@@ -56,23 +55,17 @@ export default function Profile() {
                     <div className="row p-3">
                         <div className="col-6 leftcol">
                             <p>Name:</p>
-
                             <p>Email:</p>
-                            <p>Birthate: </p>
+                            <p>Birthdate: </p>
                             <p>Contact Number:</p>
                             <p>Address:</p>
-
-
                         </div>
-
                         <div className="col-6">
-
                             <p>{user.first_name} {user.last_name} {user.username} </p>
                             <p>{user.email}</p>
                             <p>{moment(user.birth_date).format('MMMM Do YYYY')} </p>
                             <p>{user.contact}</p>
                             <p>{user.address}</p>
-
                         </div>
                     </div>
                     <div className="row">

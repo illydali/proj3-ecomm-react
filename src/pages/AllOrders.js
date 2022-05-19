@@ -59,7 +59,7 @@ export default function Orders() {
                     <Button variant='outline-secondary' as={Link} to ='/login'> Login </Button>
                 </>
                 ) : (
-                    <div className="page-width">
+                    <div className="mt-3 page-width">
                         <div className="profile-wrapper p-2">
                             <h1>My Orders </h1>
                             <table className="table">
@@ -72,13 +72,13 @@ export default function Orders() {
                                             Status
                                         </th>
                                         <th>
-                                            Placed on
+                                            Date
                                         </th>
                                         <th>
-                                            Total Paid
+                                            Total
                                         </th>
                                         <th>
-
+                                            
                                         </th>
                                     </tr>
                                 </thead>
