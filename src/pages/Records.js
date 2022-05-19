@@ -164,6 +164,7 @@ export default function Records() {
                                 options={optionGenres}
                                 placeholder='Search by Genres'
                                 onChange={handleGenreChange}
+                               
                             />
 
                         </Col>
@@ -195,7 +196,7 @@ export default function Records() {
                                                             <br />
                                                             {setCurrency(p.price)}
                                                         
-                                                        <Link variant="outline-secondary" className='suggestion stretched-link' to={"/records/" + p.id}>View</Link>
+                                                        <Link variant="outline-secondary" className='suggestion' to={"/records/" + p.id}>View</Link>
                                                     </Card.Text>
                                                 </Card.Body>
 

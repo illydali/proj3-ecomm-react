@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 import moment from 'moment';
-import { Container, Button, Row, Col, ListGroup } from 'react-bootstrap';
+import { Container, Button, Row, Col, ListGroup, Badge } from 'react-bootstrap';
 import Loader from '../components/Loader'
 
 import config from '../config';
@@ -33,7 +33,6 @@ export default function RecordView() {
                 const response = await axios.get(BASE_URL + '/records/' + record_id);
                 setRecord(response.data);
                 setLoaded(true)
-
                 let userId = localStorage.getItem("id")
                 const awaitCart = await context.getCart(userId)
                 context.setCartItem(awaitCart)
@@ -44,6 +43,19 @@ export default function RecordView() {
         }
         fetchRecord();
     }, [record_id])
+    
+    const renderGenres = () => {
+        let genreArr =[] 
+        currentRecord.genres.map(g => {
+            genreArr.push(
+                <React.Fragment key={g.id}>
+                    <Badge pill bg="light" text="dark" className='my-1'> {g.name} </Badge>
+                     </React.Fragment>
+            ) 
+            
+        })
+        return genreArr
+    }
 
     const addToCart = async (userId, recordId, recordTitle) => {
         let response = await context.addToCart(userId, recordId, recordTitle);
@@ -130,7 +142,9 @@ export default function RecordView() {
                         <ListGroup variant="flush" >
                             <ListGroup.Item>Label: {currentRecord.labels.name}</ListGroup.Item>
                             <ListGroup.Item>Release Date: {moment(currentRecord.release_date).format('MMMM Do YYYY')}</ListGroup.Item>
-                            <ListGroup.Item>Genre: {currentRecord.genres[0].name}</ListGroup.Item>
+                            <ListGroup.Item>Genre: 
+                                {renderGenres()}
+                                </ListGroup.Item>
                             <ListGroup.Item>Format: {currentRecord.type}</ListGroup.Item>
                             <ListGroup.Item>Speed: {currentRecord.speed} RPM</ListGroup.Item>
                             <ListGroup.Item>Size: {currentRecord.record_size}</ListGroup.Item>
