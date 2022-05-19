@@ -72,15 +72,9 @@ export default function Records() {
     const handleGenreChange = (options) => {
         // create a new array with the key value that you want
         const mappedOptions = options.map(option => option.value)
-        console.log(mappedOptions) // ['Worker', 'Manager']
-
         // convert the mapped option array to a string value
         const mappedOptionsToString = mappedOptions.toString()
-        console.log(mappedOptionsToString)
-
         setSearchGenre(mappedOptionsToString)
-        console.log(searchGenre)
-
     };
 
     useEffect(() => {

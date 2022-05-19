@@ -3,6 +3,9 @@ import React from 'react'
 import {Container} from 'react-bootstrap'
 
 export default function Loading() {
+
+  // https://github.com/digisz/trnt 
+  
   return (
     <Container className='min-vh-75' >
       <div id="trnt" className='py-5' >

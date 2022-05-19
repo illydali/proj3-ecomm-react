@@ -17,7 +17,6 @@ export default function Orders() {
         const getOrder = async () => {
             try {
                 let result = await context.getAllSuccessOrders()
-                console.log(result)
                 setOrders(result)
             } catch (e) {
                 console.log(e)

@@ -32,7 +32,6 @@ export default function RecordView() {
             try {
                 const response = await axios.get(BASE_URL + '/records/' + record_id);
                 setRecord(response.data);
-                console.log(response.data)
                 setLoaded(true)
 
                 let userId = localStorage.getItem("id")

@@ -32,7 +32,6 @@ export default function Register() {
             [e.target.name]: e.target.value
         })
     }
-    console.log(formState)
 
     function validateEmail(email) {
         let regex = /\S+@\S+\.\S+/;
@@ -87,8 +86,6 @@ export default function Register() {
 
         try {
             let response = await axios.post(BASE_URL +  '/users/register', formState)
-            console.log(response.data)
-
             if (response.data === "Unable to create user") {
                 setRegisterError(true)
             } else if (response.data === "Passwords do not match") {

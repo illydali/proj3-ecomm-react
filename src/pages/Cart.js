@@ -22,14 +22,12 @@ export default function Cart() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                console.log("Use effect for header works")
                 let response = await context.profile()
                 setUser(response);
                 setIsLoggedIn(true)
             } catch (e) {
                 setIsLoggedIn(false)
                 setUser({})
-                console.log('cart acesss failed', e)
             }
         }
         fetchProfile();
@@ -39,15 +37,12 @@ export default function Cart() {
     useEffect(() => {
         const fetchCart = async () => {
             let userId = localStorage.getItem("id")
-            console.log(userId)
-            console.log(user)
             let response = await axios.get(baseUrl + "/cart/" + userId)
             if (response.data !== "Unable to get all items.") {
                 setCartItem(response.data)
                 setLoaded(true)
                 setIsLoggedIn(true)
                 context.setCartItem(response.data)
-                console.log(response.data)
             } else {
                 console.log('none')
 
@@ -83,7 +78,7 @@ export default function Cart() {
         await axios.post(`${baseUrl}/cart/${userId}/updateQuantity/${e.target.name}`, {
             "quantity": cloned[cartRecordId].quantity
         })
-        console.log(cartItem)
+
     }
 
     const addQuantity = async (e) => {
@@ -96,7 +91,6 @@ export default function Cart() {
         await axios.post(`${baseUrl}/cart/${userId}/updateQuantity/${e.target.name}`, {
             "quantity": cloned[cartRecordId].quantity
         })
-        console.log(cartItem)
     }
 
     const deleteFromCart = async (e) => {
@@ -110,7 +104,6 @@ export default function Cart() {
         cloned.splice(cartRecordId, 1)
         setCartItem(cloned)
         context.setCartItem(cloned)
-        console.log('delete success')
     }
 
     const renderCartItem = () => {

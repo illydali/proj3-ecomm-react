@@ -27,7 +27,6 @@ export default function Login() {
     const login = async () => {
         try {
             let result = await context.login(email, password);
-            console.log(result);
             setLogin(true)
             context.getCart()
             navigate('/profile')

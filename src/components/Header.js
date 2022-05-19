@@ -41,11 +41,9 @@ export default function Header() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                console.log("check")
                 let response = await context.profile()
                 setUser(response);
                 setLoggedIn(true)
-                console.log(response);
             } catch (e) {
                 setLoggedIn(false)
                 setUser({})
@@ -66,11 +64,8 @@ export default function Header() {
         const getCart = async () => {
             if (loggedIn) {
                 let userId = user.id
-                console.log('works or not')
-                console.log(userId)
                 let result = await context.getCart(userId)
                 setCart(result)
-                console.log(result)
             }
             else {
                 console.log('no cart yet')
@@ -106,8 +101,6 @@ export default function Header() {
                 return (s.title.match(regex), s.artists.name.match(regex))
             })
         }
-        console.log(search)
-        console.log('find', findMatch)
         setSuggestions(findMatch)
         setText(text)
     }

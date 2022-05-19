@@ -2,15 +2,11 @@ import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import UserContext from "../context/UserContext";
 import Loader from '../components/Loader'
-import axios from "axios";
-import config from "../config";
 import { Container } from "react-bootstrap";
-const BASE_URL = config.TEST_API_URL
 
 export default function Order() {
 
     let { order_id } = useParams();
-    console.log(order_id)
     const context = useContext(UserContext)
     const [loaded, setLoaded] = useState(false)
     const [orderView, setOrderView] = useState({})
@@ -20,12 +16,10 @@ export default function Order() {
         const getOrders = async () => {
             try {
                 const result = await context.getSingleOrder(order_id)
-                console.log(result.data[0])
                 setOrderView(result.data[0])
                 setOrderDetails(result.data)
-                console.log(result.data)
             } catch (e) {
-                console.log("some error", e)
+                console.log("some order view error", e)
             } 
             setLoaded(true)
         } 

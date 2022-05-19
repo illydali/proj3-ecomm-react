@@ -18,7 +18,6 @@ export default function Profile() {
 
     useEffect(() => {
         const fetchProfile = async () => {
-            console.log("Use effect for profile works")
             let response = await context.profile()
             setUser(response);
             setLoggedIn(true)
@@ -29,7 +28,6 @@ export default function Profile() {
 
     const logout = async () => {
         let result = await context.logout();
-        console.log(result, 'logout success');
         setLoggedIn(false);
         setLoaded(false)
         setUser({})

@@ -33,7 +33,6 @@ export default function EditProfile() {
             [e.target.name]: e.target.value
         })
     }
-    console.log(formState)
 
     const validateInputs = async () => {
         let isValid = true;
@@ -72,7 +71,6 @@ export default function EditProfile() {
         try {
             let userId = user.id
             let response = await axios.patch(BASEURL + '/users/update/' + userId, formState)
-            console.log(response.data)
 
             if (response.data === "Unable to edit user") {
                 setRegisterError(true)
@@ -104,9 +102,7 @@ export default function EditProfile() {
 
     useEffect(() => {
         const fetchProfile = async () => {
-            console.log("Use effect for profile works")
             let response = await context.profile()
-
             setUser(response);
             setLoggedIn(true)
             setLoaded(true)
@@ -117,7 +113,7 @@ export default function EditProfile() {
                 'birth_date': formatBirthdate,
             }
             setFormState(formData)
-            console.log(response);
+
         }
         fetchProfile();
     }, [accessToken])
