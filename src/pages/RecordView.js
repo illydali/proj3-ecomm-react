@@ -42,7 +42,7 @@ export default function RecordView() {
             }
         }
         fetchRecord();
-    }, [record_id])
+    }, [record_id, context.cartItem])
     
     const renderGenres = () => {
         let genreArr =[] 

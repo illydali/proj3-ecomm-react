@@ -1,8 +1,10 @@
 import React, { useEffect, useState} from 'react'
+import { useLocation } from 'react-router-dom'
 import { IoChevronUpSharp } from 'react-icons/io5'
 
 export default function ScrollToTop() {
 
+    const { pathname } = useLocation()
     const [backToTop, setBackToTop] = useState(false)
 
     useEffect(() => {
@@ -14,6 +16,10 @@ export default function ScrollToTop() {
             }
         })
     }, [])
+
+    useEffect(() => {
+        window.scrollTo(0,0);
+    }, [pathname] )
 
     const scrollTop = () => {
         window.scrollTo({
