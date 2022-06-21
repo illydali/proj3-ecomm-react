@@ -173,7 +173,6 @@ This font was selected to give off an analog vibe relating to the website brand.
 - [Caolan forms](https://github.com/caolan/forms) for form building in admin site
 - Axios for connecting to API
 - CORS to allow exchanges
-- [Caolan forms](github.com/caolan/forms)
 - [JSON web tokens](https://github.com/auth0/node-jsonwebtoken)
 - flash, session-file-store and express-sessions
 - [Handlebars](https://handlebarsjs.com/) for admin site UI

@@ -201,10 +201,10 @@ export default function Header() {
                                         <ListGroup variant="flush" >
                                             <ListGroup.Item>{sug.title}
                                                 <br />
-                                                <Link variant='outline-secondary' className='suggestion' to={'/records/' + sug.id} onClick={handleClose}>view item</Link>
+                                                <Link variant='outline-secondary' className='suggestion ' to={'/records/' + sug.id} onClick={handleClose}>view item</Link>
                                             </ListGroup.Item>
                                         </ListGroup>
-
+                                        <p className="grey-line"></p>
                                     </React.Fragment>
                                 )
                             })}
